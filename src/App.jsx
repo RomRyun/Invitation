@@ -280,6 +280,17 @@ END:VCALENDAR`;
         position: 'relative',
         overflow: 'hidden'
       }}>
+        {/* 배경 이미지 */}
+        {config.hero?.useBackgroundImage && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `url(${config.hero.backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: config.hero.backgroundOpacity || 0.3
+          }}></div>
+        )}
         <div style={{
           position: 'absolute',
           inset: 0,

@@ -44,15 +44,24 @@ export const config = {
   // ColorTheme.PINK (1) 또는 ColorTheme.GREEN (2) 선택
   colorTheme: ColorTheme.GREEN,
 
+  // ===== 히어로 배경 이미지 설정 =====
+  hero: {
+    backgroundImage: '/hero_bg.jpg',  // 배경 이미지 경로 (public 폴더)
+    backgroundOpacity: 0.3,           // 배경 이미지 투명도 (0.0 ~ 1.0)
+    useBackgroundImage: true,         // 배경 이미지 사용 여부
+  },
+
   // ===== 신랑/신부 정보 =====
   groom: {
     name: '아롬',
+    fullname: '이아롬',
     fatherName: '이원조',
     motherName: '이점숙',
     relation: '장남', // 장남, 차남, 삼남 등
   },
   bride: {
     name: '경륜',
+    fullname: '신경륜',
     fatherName: '신락현',
     motherName: '곽광숙',
     relation: '장녀', // 장녀, 차녀, 삼녀 등
@@ -110,12 +119,12 @@ export const config = {
     groom: {
       bank: '신한은행',
       accountNumber: '110-482-263062',
-      holder: '아롬',
+      holder: '이아롬',
     },
     bride: {
       bank: '예시은행',
       accountNumber: '987-654-321098',
-      holder: '경륜',
+      holder: '신경륜',
     },
     // 부모님 계좌 추가 시 아래 주석 해제
     // groomFather: {
