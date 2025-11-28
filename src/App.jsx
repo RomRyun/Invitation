@@ -354,37 +354,57 @@ END:VCALENDAR`;
           >INVITATION</motion.div>
         </motion.div>
 
-        {/* 중앙: 신랑 신부 이름 */}
+        {/* 중앙: 신랑 신부 이름 (한 줄) */}
         <div style={{ 
           flex: 1, 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center',
           position: 'relative',
-          zIndex: 10
+          zIndex: 10,
+          paddingTop: '15vh'
         }}>
           <motion.div
-            style={{ textAlign: 'center' }}
+            style={{ 
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '1rem'
+            }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <h1 style={{ 
-              fontSize: '2.5rem', 
-              fontWeight: 300, 
-              color: '#1f2937', 
-              marginBottom: '0.5rem',
-              letterSpacing: '-0.025em'
-            }}>{config.groom.name}</h1>
-            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-              <span style={{ color: theme.heart }}>♥</span>
-            </div>
-            <h1 style={{ 
-              fontSize: '2.5rem', 
-              fontWeight: 300, 
-              color: '#1f2937',
-              letterSpacing: '-0.025em'
-            }}>{config.bride.name}</h1>
+            <span style={{ 
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: '2rem', 
+              fontWeight: 400, 
+              color: '#374151', 
+              letterSpacing: '0.05em'
+            }}>{config.groom.name}</span>
+            <motion.span 
+              style={{ 
+                fontSize: '1.75rem',
+                color: theme.accentSolid,
+                filter: 'drop-shadow(0 0 8px rgba(134, 239, 172, 0.5))'
+              }}
+              animate={{ 
+                scale: [1, 1.2, 1],
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity,
+                repeatType: 'loop'
+              }}
+            >♥</motion.span>
+            <span style={{ 
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: '2rem', 
+              fontWeight: 400, 
+              color: '#374151',
+              letterSpacing: '0.05em'
+            }}>{config.bride.name}</span>
           </motion.div>
         </div>
 
