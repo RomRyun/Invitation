@@ -16,6 +16,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [activeMapTab, setActiveMapTab] = useState('naver');
+  const [activeCalendarTab, setActiveCalendarTab] = useState('google');
   const touchStartTime = useRef(0);
   const touchMoved = useRef(false);
 
@@ -522,75 +523,6 @@ END:VCALENDAR`;
         </div>
       </section>
 
-      {/* D-Day 카운터 Section */}
-      <section className="py-16">
-        <div className="container">
-          <motion.div
-            style={{
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.6)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.8)'
-            }}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 style={{
-              fontSize: '1.5rem',
-              fontWeight: 300,
-              textAlign: 'center',
-              marginBottom: '2.5rem',
-              color: '#374151',
-              letterSpacing: '0.025em'
-            }}>D-Day</h2>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '0.625rem'
-            }}>
-              {[
-                { label: '일', value: timeLeft.days },
-                { label: '시', value: timeLeft.hours },
-                { label: '분', value: timeLeft.minutes },
-                { label: '초', value: timeLeft.seconds },
-              ].map((item, index) => (
-                <div key={index} style={{ textAlign: 'center' }}>
-                  <div style={{
-                    backdropFilter: 'blur(4px)',
-                    WebkitBackdropFilter: 'blur(4px)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                    borderRadius: '0.75rem',
-                    padding: '0.75rem',
-                    boxShadow: '0 4px 16px 0 rgba(0,0,0,0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.6)'
-                  }}>
-                    <div style={{
-                      fontSize: '1.875rem',
-                      fontWeight: 300,
-                      color: '#374151',
-                      marginBottom: '0.125rem',
-                      letterSpacing: '-0.025em'
-                    }}>
-                      {String(item.value).padStart(2, '0')}
-                    </div>
-                    <div style={{
-                      fontSize: '0.75rem',
-                      color: '#6b7280',
-                      fontWeight: 300
-                    }}>{item.label}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* 픽셀아트 Section */}
       <section className="py-16">
         <div className="container">
@@ -654,6 +586,40 @@ END:VCALENDAR`;
                 <p style={{ fontSize: '0.75rem', marginTop: '0.5rem', color: '#9ca3af' }}>/public/pixel-art.gif 파일을 추가하세요</p>
               </div>
             </div>
+            
+            {/* 우리의 이야기 텍스트 */}
+            {config.ourStory && config.ourStory.length > 0 && (
+              <div style={{ 
+                marginTop: '2rem',
+                paddingTop: '1.5rem',
+                borderTop: '1px solid rgba(229, 231, 235, 0.6)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem'
+              }}>
+                {config.ourStory.map((story, idx) => (
+                  <div key={idx} style={{ textAlign: 'center' }}>
+                    <div style={{ 
+                      color: '#4b5563', 
+                      fontSize: '0.9375rem', 
+                      lineHeight: 1.8,
+                      fontWeight: 300,
+                      fontStyle: 'italic'
+                    }}>
+                      {story.text.map((line, lineIdx) => (
+                        <p key={lineIdx}>{line}</p>
+                      ))}
+                    </div>
+                    <p style={{ 
+                      marginTop: '0.75rem', 
+                      color: '#6b7280', 
+                      fontSize: '0.8125rem',
+                      fontWeight: 400
+                    }}>— {story.author}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -995,6 +961,75 @@ END:VCALENDAR`;
         </div>
       </section>
 
+      {/* D-Day 카운터 Section */}
+      <section className="py-16">
+        <div className="container">
+          <motion.div
+            style={{
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              backgroundColor: 'rgba(255, 255, 255, 0.6)',
+              borderRadius: '1rem',
+              padding: '2rem',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.8)'
+            }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 style={{
+              fontSize: '1.5rem',
+              fontWeight: 300,
+              textAlign: 'center',
+              marginBottom: '2.5rem',
+              color: '#374151',
+              letterSpacing: '0.025em'
+            }}>D-Day</h2>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '0.625rem'
+            }}>
+              {[
+                { label: '일', value: timeLeft.days },
+                { label: '시', value: timeLeft.hours },
+                { label: '분', value: timeLeft.minutes },
+                { label: '초', value: timeLeft.seconds },
+              ].map((item, index) => (
+                <div key={index} style={{ textAlign: 'center' }}>
+                  <div style={{
+                    backdropFilter: 'blur(4px)',
+                    WebkitBackdropFilter: 'blur(4px)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                    borderRadius: '0.75rem',
+                    padding: '0.75rem',
+                    boxShadow: '0 4px 16px 0 rgba(0,0,0,0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.6)'
+                  }}>
+                    <div style={{
+                      fontSize: '1.875rem',
+                      fontWeight: 300,
+                      color: '#374151',
+                      marginBottom: '0.125rem',
+                      letterSpacing: '-0.025em'
+                    }}>
+                      {String(item.value).padStart(2, '0')}
+                    </div>
+                    <div style={{
+                      fontSize: '0.75rem',
+                      color: '#6b7280',
+                      fontWeight: 300
+                    }}>{item.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* 계좌번호 Section */}
       <section className="py-16">
         <div className="container">
@@ -1160,39 +1195,101 @@ END:VCALENDAR`;
             }}>캘린더에 추가</h2>
             <p style={{
               color: '#4b5563',
-              marginBottom: '2rem',
+              marginBottom: '1.5rem',
               fontSize: '0.875rem',
               fontWeight: 300
             }}>
               결혼식 일정을 캘린더에 추가하시겠어요?
             </p>
-            <button
-              onClick={downloadICS}
+
+            {/* 캘린더 탭 */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '0.25rem',
+              marginBottom: '1rem',
+              backgroundColor: 'rgba(255, 255, 255, 0.5)',
+              borderRadius: '0.75rem',
+              padding: '0.25rem'
+            }}>
+              {[
+                { id: 'google', label: 'Google' },
+                { id: 'apple', label: 'Apple' },
+                { id: 'android', label: 'Android' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveCalendarTab(tab.id)}
+                  style={{
+                    flex: 1,
+                    padding: '0.625rem 0.5rem',
+                    borderRadius: '0.5rem',
+                    border: 'none',
+                    backgroundColor: activeCalendarTab === tab.id ? 'white' : 'transparent',
+                    color: activeCalendarTab === tab.id ? '#374151' : '#6b7280',
+                    fontSize: '0.8125rem',
+                    fontWeight: activeCalendarTab === tab.id ? 500 : 300,
+                    cursor: 'pointer',
+                    transition: 'all 200ms',
+                    boxShadow: activeCalendarTab === tab.id ? '0 2px 8px rgba(0,0,0,0.1)' : 'none'
+                  }}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* 캘린더 추가 버튼 */}
+            <a
+              href={
+                activeCalendarTab === 'google' 
+                  ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`${config.groom.name} & ${config.bride.name} 결혼식`)}&dates=${config.wedding.date.replace(/-/g, '')}T${config.wedding.time.replace(':', '')}00/${config.wedding.date.replace(/-/g, '')}T${String(parseInt(config.wedding.time.split(':')[0]) + 2).padStart(2, '0')}0000&details=${encodeURIComponent(`${config.venue.name}에서 열리는 결혼식에 초대합니다.`)}&location=${encodeURIComponent(config.venue.address)}`
+                  : undefined
+              }
+              onClick={(e) => {
+                if (activeCalendarTab !== 'google') {
+                  e.preventDefault();
+                  downloadICS();
+                }
+              }}
+              target={activeCalendarTab === 'google' ? '_blank' : undefined}
+              rel="noopener noreferrer"
               style={{
-                backdropFilter: 'blur(4px)',
-                WebkitBackdropFilter: 'blur(4px)',
-                backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                borderRadius: '0.75rem',
-                padding: '0.75rem 2rem',
-                color: '#4b5563',
-                fontSize: '0.875rem',
-                fontWeight: 300,
-                border: 'none',
-                cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '0.5rem',
-                boxShadow: '0 2px 8px 0 rgba(0,0,0,0.05)',
-                transition: 'all 300ms'
+                backdropFilter: 'blur(4px)',
+                WebkitBackdropFilter: 'blur(4px)',
+                backgroundColor: 
+                  activeCalendarTab === 'google' ? 'rgba(66, 133, 244, 0.15)' :
+                  activeCalendarTab === 'apple' ? 'rgba(0, 0, 0, 0.08)' :
+                  'rgba(61, 220, 132, 0.15)',
+                borderRadius: '0.75rem',
+                padding: '0.75rem 1.5rem',
+                color: 
+                  activeCalendarTab === 'google' ? '#4285F4' :
+                  activeCalendarTab === 'apple' ? '#1d1d1f' :
+                  '#3DDC84',
+                fontSize: '0.875rem',
+                fontWeight: 400,
+                textDecoration: 'none',
+                boxShadow: '0 2px 8px 0 rgba(0,0,0,0.08)',
+                transition: 'all 300ms',
+                cursor: 'pointer',
+                border: `1px solid ${
+                  activeCalendarTab === 'google' ? 'rgba(66, 133, 244, 0.3)' :
+                  activeCalendarTab === 'apple' ? 'rgba(0, 0, 0, 0.15)' :
+                  'rgba(61, 220, 132, 0.3)'
+                }`
               }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.7)'}
             >
-              <svg style={{ width: '1rem', height: '1rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg style={{ width: '1.125rem', height: '1.125rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              캘린더에 추가하기
-            </button>
+              {activeCalendarTab === 'google' ? 'Google 캘린더' : 
+               activeCalendarTab === 'apple' ? 'Apple 캘린더' : 'Android 캘린더'}에 추가
+            </a>
           </motion.div>
         </div>
       </section>

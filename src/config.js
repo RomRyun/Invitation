@@ -47,7 +47,7 @@ export const config = {
   // ===== 히어로 배경 이미지 설정 =====
   hero: {
     backgroundImage: '/bg.jpg',  // 배경 이미지 경로 (public 폴더)
-    backgroundOpacity: 0.3,           // 배경 이미지 투명도 (0.0 ~ 1.0)
+    backgroundOpacity: 0.2,           // 배경 이미지 투명도 (0.0 ~ 1.0)
     useBackgroundImage: true,         // 배경 이미지 사용 여부
   },
 
@@ -160,5 +160,23 @@ export const config = {
 
   // ===== 픽셀아트/메인 이미지 =====
   pixelArt: '/pixel_art.gif',
+
+  // ===== 우리의 이야기 (픽셀아트 아래 텍스트) =====
+  ourStory: [
+    {
+      text: [
+        '첫 번째 줄 텍스트를 입력하세요.',
+        '두 번째 줄 텍스트를 입력하세요.',
+      ],
+      author: '신랑',
+    },
+    {
+      text: [
+        '첫 번째 줄 텍스트를 입력하세요.',
+        '두 번째 줄 텍스트를 입력하세요.',
+      ],
+      author: '신부',
+    },
+  ],
 };
 
