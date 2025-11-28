@@ -285,12 +285,20 @@ END:VCALENDAR`;
           <div style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `url(${config.hero.backgroundImage})`,
-            backgroundSize: '100% auto',
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
+            display: 'flex',
+            justifyContent: 'center',
             opacity: config.hero.backgroundOpacity || 0.3
-          }}></div>
+          }}>
+            <div style={{
+              width: '100%',
+              maxWidth: '480px',
+              height: '100%',
+              backgroundImage: `url(${config.hero.backgroundImage})`,
+              backgroundSize: '100% auto',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat'
+            }}></div>
+          </div>
         )}
         <div style={{
           position: 'absolute',
