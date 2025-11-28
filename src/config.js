@@ -73,8 +73,8 @@ export const config = {
     time: '13:00', // HH:MM 형식 (24시간)
     dateText: '2026년 4월 18일 토요일',
     timeText: '오후 1시',
-    devDescription: '* 본 청접장은 github repository에서 확인할 수 있습니다.',
-    devRepository: 'https://github.com/arom-dev/wedding-invitation',
+    devDescription: 'Made with ♥',
+    devRepository: '',
   },
 
   // ===== 예식장 정보 =====
