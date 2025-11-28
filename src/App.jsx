@@ -286,8 +286,9 @@ END:VCALENDAR`;
             position: 'absolute',
             inset: 0,
             backgroundImage: `url(${config.hero.backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundSize: '100% auto',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
             opacity: config.hero.backgroundOpacity || 0.3
           }}></div>
         )}
