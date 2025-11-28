@@ -74,7 +74,7 @@ export const config = {
     dateText: '2026년 4월 18일 토요일',
     timeText: '오후 1시',
     devDescription: 'Made with ♥',
-    devRepository: '',
+    devRepository: 'https://github.com/RomRyun/Invitation',
   },
 
   // ===== 예식장 정보 =====
