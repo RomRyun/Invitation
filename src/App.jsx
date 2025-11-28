@@ -275,8 +275,7 @@ END:VCALENDAR`;
       <section style={{
         minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'column',
         position: 'relative',
         overflow: 'hidden'
       }}>
@@ -290,12 +289,13 @@ END:VCALENDAR`;
             opacity: config.hero.backgroundOpacity || 0.3
           }}>
             <div style={{
-              width: '100%',
-              maxWidth: '480px',
+              width: 'auto',
               height: '100%',
+              aspectRatio: '3/4',
+              maxWidth: '100%',
               backgroundImage: `url(${config.hero.backgroundImage})`,
-              backgroundSize: '100% auto',
-              backgroundPosition: 'center center',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center top',
               backgroundRepeat: 'no-repeat'
             }}></div>
           </div>
@@ -311,58 +311,100 @@ END:VCALENDAR`;
           background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 50%)'
         }}></div>
         
-        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+        {/* 상단: WEDDING INVITATION */}
+        <motion.div
+          style={{
+            position: 'relative',
+            zIndex: 10,
+            paddingTop: '3rem',
+            textAlign: 'center'
+          }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div style={{ 
+            fontSize: '2rem', 
+            letterSpacing: '0.4em', 
+            color: theme.accent, 
+            fontWeight: 200,
+            marginBottom: '0.25rem'
+          }}>WEDDING</div>
+          <div style={{ 
+            fontSize: '2rem', 
+            letterSpacing: '0.4em', 
+            color: theme.accent, 
+            fontWeight: 200
+          }}>INVITATION</div>
+        </motion.div>
+
+        {/* 중앙: 신랑 신부 이름 */}
+        <div style={{ 
+          flex: 1, 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          position: 'relative',
+          zIndex: 10
+        }}>
           <motion.div
-            className="text-center"
+            style={{ textAlign: 'center' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div style={{ 
-              fontSize: '0.75rem', 
-              letterSpacing: '0.3em', 
-              color: theme.accent, 
-              marginBottom: '2rem',
-              fontWeight: 300
-            }}>WEDDING INVITATION</div>
             <h1 style={{ 
-              fontSize: '2.25rem', 
+              fontSize: '2.5rem', 
               fontWeight: 300, 
               color: '#1f2937', 
-              marginBottom: '0.75rem',
+              marginBottom: '0.5rem',
               letterSpacing: '-0.025em'
             }}>{config.groom.name}</h1>
-            <div style={{ fontSize: '1.875rem', marginBottom: '0.75rem' }}>
+            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
               <span style={{ color: theme.heart }}>♥</span>
             </div>
             <h1 style={{ 
-              fontSize: '2.25rem', 
+              fontSize: '2.5rem', 
               fontWeight: 300, 
-              color: '#1f2937', 
-              marginBottom: '3rem',
+              color: '#1f2937',
               letterSpacing: '-0.025em'
             }}>{config.bride.name}</h1>
-            <div style={{ 
-              fontSize: '1rem', 
-              color: '#4b5563', 
-              marginBottom: '0.25rem',
-              fontWeight: 300,
-              letterSpacing: '0.025em'
-            }}>
-              {config.wedding.dateText}
-            </div>
-            <div style={{ 
-              fontSize: '0.875rem', 
-              color: '#6b7280', 
-              fontWeight: 300
-            }}>{config.wedding.timeText}</div>
           </motion.div>
         </div>
 
+        {/* 하단: 날짜 */}
+        <motion.div
+          style={{
+            position: 'relative',
+            zIndex: 10,
+            paddingBottom: '4rem',
+            textAlign: 'center'
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div style={{ 
+            fontSize: '1rem', 
+            color: '#4b5563', 
+            marginBottom: '0.25rem',
+            fontWeight: 300,
+            letterSpacing: '0.05em'
+          }}>
+            {config.wedding.dateText}
+          </div>
+          <div style={{ 
+            fontSize: '0.875rem', 
+            color: '#6b7280', 
+            fontWeight: 300
+          }}>{config.wedding.timeText}</div>
+        </motion.div>
+
+        {/* 스크롤 화살표 */}
         <motion.div
           style={{
             position: 'absolute',
-            bottom: '3rem',
+            bottom: '1.5rem',
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 20
