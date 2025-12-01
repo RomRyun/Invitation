@@ -404,9 +404,9 @@ END:VCALENDAR`;
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <span style={{ 
-              fontFamily: "'Nanum Myeongjo', 'MaruBuri', serif",
+              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
               fontSize: '2rem', 
-              fontWeight: 700, 
+              fontWeight: 400, 
               color: '#374151', 
               letterSpacing: '0.1em'
             }}>{config.groom.name}</span>
@@ -426,9 +426,9 @@ END:VCALENDAR`;
               }}
             >♥</motion.span>
             <span style={{ 
-              fontFamily: "'Nanum Myeongjo', 'MaruBuri', serif",
+              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
               fontSize: '2rem', 
-              fontWeight: 700, 
+              fontWeight: 400, 
               color: '#374151',
               letterSpacing: '0.1em'
             }}>{config.bride.name}</span>
@@ -528,9 +528,9 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Nanum Myeongjo', 'MaruBuri', serif",
+              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
               fontSize: '1.5rem',
-              fontWeight: 700,
+              fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
@@ -594,9 +594,9 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Nanum Myeongjo', 'MaruBuri', serif",
+              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
               fontSize: '1.5rem',
-              fontWeight: 700,
+              fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
@@ -680,9 +680,9 @@ END:VCALENDAR`;
       <section id="gallery" className="py-16">
         <div className="container">
           <h2 style={{
-            fontFamily: "'Nanum Myeongjo', 'MaruBuri', serif",
+            fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
             fontSize: '1.5rem',
-            fontWeight: 700,
+            fontWeight: 400,
             textAlign: 'center',
             marginBottom: '2rem',
             color: '#374151',
@@ -800,6 +800,66 @@ END:VCALENDAR`;
               }}>
                 터치하여 확대
               </div>
+
+              {/* 좌우 화살표 */}
+              {currentImageIndex > 0 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(prev => prev - 1);
+                  }}
+                  style={{
+                    position: 'absolute',
+                    left: '0.5rem',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: '2.5rem',
+                    height: '2.5rem',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                    color: '#374151',
+                    fontSize: '1.25rem',
+                    fontWeight: 300
+                  }}
+                >
+                  ‹
+                </button>
+              )}
+              {currentImageIndex < galleryImages.length - 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(prev => prev + 1);
+                  }}
+                  style={{
+                    position: 'absolute',
+                    right: '0.5rem',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: '2.5rem',
+                    height: '2.5rem',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                    color: '#374151',
+                    fontSize: '1.25rem',
+                    fontWeight: 300
+                  }}
+                >
+                  ›
+                </button>
+              )}
             </div>
             
             {/* 인디케이터 */}
@@ -854,9 +914,9 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Nanum Myeongjo', 'MaruBuri', serif",
+              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
               fontSize: '1.5rem',
-              fontWeight: 700,
+              fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
@@ -1217,9 +1277,9 @@ END:VCALENDAR`;
       <section id="account" className="py-16">
         <div className="container">
           <h2 style={{
-            fontFamily: "'Nanum Myeongjo', 'MaruBuri', serif",
+            fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
             fontSize: '1.5rem',
-            fontWeight: 700,
+            fontWeight: 400,
             textAlign: 'center',
             marginBottom: '2rem',
             color: '#374151',
