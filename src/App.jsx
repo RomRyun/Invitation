@@ -351,34 +351,34 @@ END:VCALENDAR`;
         >
           <motion.div 
             style={{ 
-              fontFamily: "'Cormorant Garamond', 'Playfair Display', serif",
-              fontSize: '2.75rem', 
-              letterSpacing: '0.2em', 
+              fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
+              fontSize: '2.5rem', 
+              letterSpacing: '0.15em', 
               color: theme.accentSolid, 
               fontWeight: 400,
-              fontStyle: 'italic',
               textAlign: 'left',
-              lineHeight: 1.1
+              lineHeight: 1.2
             }}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-          >Wedding</motion.div>
-          <motion.div 
-            style={{ 
-              fontFamily: "'Cormorant Garamond', 'Playfair Display', serif",
-              fontSize: '2.75rem', 
-              letterSpacing: '0.2em', 
-              color: theme.accentSolid, 
-              fontWeight: 400,
-              fontStyle: 'italic',
-              textAlign: 'right',
-              lineHeight: 1.1
-            }}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >Invitation</motion.div>
+          >{config.hero.titleLine1}</motion.div>
+          {config.hero.titleLine2 && (
+            <motion.div 
+              style={{ 
+                fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
+                fontSize: '2.5rem', 
+                letterSpacing: '0.15em', 
+                color: theme.accentSolid, 
+                fontWeight: 400,
+                textAlign: 'right',
+                lineHeight: 1.2
+              }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >{config.hero.titleLine2}</motion.div>
+          )}
         </motion.div>
 
         {/* 중앙: 신랑 신부 이름 + 날짜 */}
@@ -447,19 +447,19 @@ END:VCALENDAR`;
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <div style={{ 
-              fontFamily: "'Pretendard', sans-serif",
-              fontSize: '1.25rem', 
-              fontWeight: 700,
+              fontFamily: "'Gowun Batang', 'Pretendard', sans-serif",
+              fontSize: '1.125rem', 
+              fontWeight: 400,
               letterSpacing: '0.02em',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '0.25rem'
             }}>
-              <span style={{ color: '#1f2937' }}>2026년</span>
-              <span style={{ color: theme.accentSolid }}>4월 18일</span>
-              <span style={{ color: '#1f2937' }}>토요일</span>
-              <span style={{ color: theme.accentSolid, marginLeft: '0.5rem' }}>오후 1시</span>
+              <span style={{ color: '#374151' }}>{config.wedding.year}</span>
+              <span style={{ color: theme.accentSolid, fontWeight: 700 }}>{config.wedding.monthDay}</span>
+              <span style={{ color: '#374151' }}>{config.wedding.dayOfWeek}</span>
+              <span style={{ color: theme.accentSolid, fontWeight: 700, marginLeft: '0.5rem' }}>{config.wedding.timeText}</span>
             </div>
           </motion.div>
 
@@ -474,21 +474,23 @@ END:VCALENDAR`;
             transition={{ duration: 0.8, delay: 1 }}
           >
             <div style={{ 
-              fontFamily: "'Pretendard', sans-serif",
-              fontSize: '1.25rem', 
+              fontFamily: "'Gowun Batang', 'Pretendard', sans-serif",
+              fontSize: '1.125rem', 
               color: '#1f2937', 
-              fontWeight: 600,
+              fontWeight: 400,
               letterSpacing: '0.05em',
-              marginBottom: '0.375rem'
+              marginBottom: '0.25rem'
             }}>
-              {config.venue.name}
+              {config.venue.name} {config.venue.branch}
             </div>
-            <div style={{ 
-              fontFamily: "'Pretendard', sans-serif",
-              fontSize: '0.875rem', 
-              color: '#6b7280', 
-              fontWeight: 400
-            }}>{config.venue.hall}</div>
+            {config.venue.hall && (
+              <div style={{ 
+                fontFamily: "'Pretendard', sans-serif",
+                fontSize: '0.875rem', 
+                color: '#6b7280', 
+                fontWeight: 400
+              }}>{config.venue.hall}</div>
+            )}
           </motion.div>
         </div>
 
@@ -530,14 +532,14 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Gowun Batang', 'Nanum Myeongjo', serif",
+              fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
               fontSize: '1.5rem',
               fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
               letterSpacing: '0.15em'
-            }}>{config.greeting.title}</h2>
+            }}>{config.sectionTitles.greeting}</h2>
             <div style={{ 
               display: 'flex',
               flexDirection: 'column',
@@ -596,14 +598,14 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Gowun Batang', 'Nanum Myeongjo', serif",
+              fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
               fontSize: '1.5rem',
               fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
               letterSpacing: '0.15em'
-            }}>우리의 이야기</h2>
+            }}>{config.sectionTitles.story}</h2>
             <div style={{
               display: 'flex',
               justifyContent: 'center',
@@ -682,14 +684,14 @@ END:VCALENDAR`;
       <section id="gallery" className="py-16">
         <div className="container">
           <h2 style={{
-            fontFamily: "'Gowun Batang', 'Nanum Myeongjo', serif",
+            fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
             fontSize: '1.5rem',
             fontWeight: 400,
             textAlign: 'center',
             marginBottom: '2rem',
             color: '#374151',
             letterSpacing: '0.15em'
-          }}>갤러리</h2>
+          }}>{config.sectionTitles.gallery}</h2>
           <div style={{
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
@@ -916,20 +918,20 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Gowun Batang', 'Nanum Myeongjo', serif",
+              fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
               fontSize: '1.5rem',
               fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
               letterSpacing: '0.15em'
-            }}>오시는 길</h2>
+            }}>{config.sectionTitles.location}</h2>
             <div style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#4b5563' }}>
-              <p style={{ fontSize: '1rem', fontWeight: 300, marginBottom: '0.5rem' }}>{config.venue.name}</p>
+              <p style={{ fontSize: '1rem', fontWeight: 300, marginBottom: '0.5rem' }}>{config.venue.name} {config.venue.branch}</p>
               {config.venue.hall && (
                 <p style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: 300, marginBottom: '0.5rem' }}>{config.venue.hall}</p>
               )}
-              <p style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: 300, marginBottom: '1rem' }}>{config.wedding.dateText} {config.wedding.timeText}</p>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: 300, marginBottom: '1rem' }}>{config.wedding.year} {config.wedding.monthDay} {config.wedding.dayOfWeek} {config.wedding.timeText}</p>
               <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.875rem', color: '#4b5563', fontWeight: 300 }}>
                 <p style={{ marginBottom: '0.75rem', fontWeight: 400 }}>주소</p>
                 <p style={{ lineHeight: 1.625 }}>
@@ -1279,14 +1281,14 @@ END:VCALENDAR`;
       <section id="account" className="py-16">
         <div className="container">
           <h2 style={{
-            fontFamily: "'Gowun Batang', 'Nanum Myeongjo', serif",
+            fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
             fontSize: '1.5rem',
             fontWeight: 400,
             textAlign: 'center',
             marginBottom: '2rem',
             color: '#374151',
             letterSpacing: '0.15em'
-          }}>마음 전하실 곳</h2>
+          }}>{config.sectionTitles.account}</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {/* 신랑측 계좌 */}
             <motion.div
@@ -1417,11 +1419,11 @@ END:VCALENDAR`;
       <footer style={{ padding: '3rem 1rem', textAlign: 'center', color: '#6b7280' }}>
         <div className="container">
           <p style={{ marginBottom: '0.375rem', fontSize: '0.875rem', fontWeight: 300 }}>{config.groom.name} ♥ {config.bride.name}</p>
-          <p style={{ marginBottom: '1.5rem', fontSize: '0.75rem', fontWeight: 300 }}>{config.wedding.dateText}</p>
-          <p style={{ fontSize: '0.75rem', fontWeight: 300 }}>{config.wedding.devDescription}</p>
-          {config.wedding.devRepository && (
+          <p style={{ marginBottom: '1.5rem', fontSize: '0.75rem', fontWeight: 300 }}>{config.wedding.year} {config.wedding.monthDay}</p>
+          <p style={{ fontSize: '0.75rem', fontWeight: 300 }}>{config.footer.message}</p>
+          {config.footer.showRepository && config.footer.repository && (
             <a 
-              href={config.wedding.devRepository} 
+              href={config.footer.repository} 
               target="_blank" 
               rel="noopener noreferrer"
               style={{ 

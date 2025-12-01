@@ -10,90 +10,97 @@ export const ColorTheme = {
 // ===== 컬러 팔레트 정의 =====
 export const colorPalettes = {
   [ColorTheme.PINK]: {
-    // 배경 그라데이션
     bgGradient: 'linear-gradient(to bottom right, #ffe4e6, #fce7f3, #e0e7ff)',
     bgOverlay: 'linear-gradient(to bottom right, rgba(251, 113, 133, 0.2), rgba(244, 114, 182, 0.2), rgba(196, 181, 253, 0.2))',
-    // 텍스트 강조색
     accent: 'rgba(251, 113, 133, 0.8)',
     accentSolid: '#fb7185',
     heart: '#fda4af',
-    // 갤러리 에러 배경
     galleryErrorBg: 'linear-gradient(to bottom right, #ffe4e6, #fce7f3)',
-    // 인디케이터
     indicatorActive: '#fb7185',
     indicatorInactive: '#d1d5db',
   },
   [ColorTheme.GREEN]: {
-    // 배경 그라데이션
     bgGradient: 'linear-gradient(to bottom right, #dcfce7, #d1fae5, #e0f2fe)',
     bgOverlay: 'linear-gradient(to bottom right, rgba(74, 222, 128, 0.2), rgba(52, 211, 153, 0.2), rgba(147, 197, 253, 0.2))',
-    // 텍스트 강조색 (어두운 그린)
     accent: 'rgba(22, 163, 74, 0.85)',
     accentSolid: '#15803d',
     heart: '#16a34a',
-    // 갤러리 에러 배경
     galleryErrorBg: 'linear-gradient(to bottom right, #dcfce7, #d1fae5)',
-    // 인디케이터
     indicatorActive: '#4ade80',
     indicatorInactive: '#d1d5db',
   },
 };
 
 export const config = {
-  // ===== 테마 설정 =====
-  // ColorTheme.PINK (1) 또는 ColorTheme.GREEN (2) 선택
-  colorTheme: ColorTheme.GREEN,
+  // ============================================================
+  // 1. 기본 설정
+  // ============================================================
+  colorTheme: ColorTheme.GREEN,  // PINK(1) 또는 GREEN(2)
 
-  // ===== 히어로 배경 이미지 설정 =====
+  // ============================================================
+  // 2. 히어로 섹션 (첫 화면)
+  // ============================================================
   hero: {
-    backgroundImage: '/bg.jpg',  // 배경 이미지 경로 (public 폴더)
-    backgroundOpacity: 0.5,           // 배경 이미지 투명도 (0.0 ~ 1.0) - 0.5가 적당
-    useBackgroundImage: true,         // 배경 이미지 사용 여부
+    // 메인 타이틀 (영문 또는 한글)
+    titleLine1: 'Wedding',        // 첫 줄 (예: 'Wedding', '결혼합니다', '저희 결혼합니다')
+    titleLine2: 'Invitation',     // 둘째 줄 (예: 'Invitation', '', '청첩장')
+    // 배경 이미지
+    backgroundImage: '/bg.jpg',
+    backgroundOpacity: 0.5,       // 0.0 ~ 1.0
+    useBackgroundImage: true,
   },
 
-  // ===== 신랑/신부 정보 =====
+  // ============================================================
+  // 3. 신랑/신부 정보
+  // ============================================================
   groom: {
-    name: '아롬',
-    fullname: '이아롬',
+    name: '아롬',           // 표시용 이름
+    fullname: '이아롬',     // 성+이름
     fatherName: '이원조',
     motherName: '이점숙',
-    relation: '장남', // 장남, 차남, 삼남 등
+    relation: '장남',       // 장남, 차남, 삼남 등
   },
   bride: {
     name: '경륜',
     fullname: '신경륜',
     fatherName: '신락현',
     motherName: '곽광숙',
-    relation: '장녀', // 장녀, 차녀, 삼녀 등
+    relation: '장녀',
   },
 
-  // ===== 결혼식 정보 =====
+  // ============================================================
+  // 4. 결혼식 날짜/시간
+  // ============================================================
   wedding: {
-    date: '2026-04-18', // YYYY-MM-DD 형식
-    time: '13:00', // HH:MM 형식 (24시간)
-    dateText: '2026년 4월 18일 토요일',
+    date: '2026-04-18',           // YYYY-MM-DD (캘린더용)
+    time: '13:00',                // HH:MM 24시간 (캘린더용)
+    // 표시용 텍스트
+    year: '2026년',
+    monthDay: '4월 18일',
+    dayOfWeek: '토요일',
     timeText: '오후 1시',
-    devDescription: 'Made with ♥',
-    devRepository: 'https://github.com/RomRyun/Invitation',
   },
 
-  // ===== 예식장 정보 =====
+  // ============================================================
+  // 5. 예식장 정보
+  // ============================================================
   venue: {
-    name: '에스가든웨딩홀 청주점',
+    name: '에스가든웨딩홀',        // 예식장 이름
+    branch: '청주점',              // 지점명 (없으면 빈 문자열)
+    hall: '',                      // 홀 이름 (예: '그랜드볼룸', 없으면 빈 문자열)
     address: '충청북도 청주시 서원구 1순환로 854',
     addressDetail: '(산남동 320번지, CJB미디어센터)',
-    hall: '', // 예: '3층 그랜드홀' (없으면 비워두기)
   },
 
-  // ===== 지도 링크 =====
+  // ============================================================
+  // 6. 지도/교통
+  // ============================================================
   maps: {
     naver: 'https://naver.me/G02HkD4H',
     kakao: 'https://kko.kakao.com/m7wFN3SI-8',
     tmap: 'https://tmap.life/ea42d1f6',
-    image: '/map_image.jpg', // 지도 이미지 (public 폴더에 추가)
+    image: '/map_image.jpg',
   },
-
-  // ===== 교통편 안내 =====
   transportation: [
     '남부터미널 | 자차 5분 · 대중교통 20분',
     '가경시외버스터미널 | 자차 10분 · 대중교통 30분',
@@ -101,9 +108,23 @@ export const config = {
   ],
   busInfo: '버스 | 30-1, 30-2, 710, 843, 851',
 
-  // ===== 인사말 =====
+  // ============================================================
+  // 7. 섹션 타이틀 (한글)
+  // ============================================================
+  sectionTitles: {
+    greeting: '초대합니다',
+    story: '우리의 이야기',
+    gallery: '갤러리',
+    location: '오시는 길',
+    account: '마음 전하실 곳',
+    // dday: 'D-Day',
+    // calendar: '캘린더에 추가',
+  },
+
+  // ============================================================
+  // 8. 인사말
+  // ============================================================
   greeting: {
-    title: '초대합니다',
     message: [
       '서로의 삶에 따뜻한 동반자가 되어',
       '사랑과 신뢰로 한 가정을 이루려 합니다.',
@@ -114,54 +135,9 @@ export const config = {
     ],
   },
 
-  // ===== 계좌 정보 =====
-  accounts: {
-    groom: {
-      bank: '신한은행',
-      accountNumber: '110-482-263062',
-      holder: '이아롬',
-    },
-    bride: {
-      bank: '예시은행',
-      accountNumber: '987-654-321098',
-      holder: '신경륜',
-    },
-    // 부모님 계좌 추가 시 아래 주석 해제
-    // groomFather: {
-    //   bank: '은행명',
-    //   accountNumber: '000-000-000000',
-    //   holder: '이원조',
-    // },
-    // groomMother: {
-    //   bank: '은행명',
-    //   accountNumber: '000-000-000000',
-    //   holder: '이정숙',
-    // },
-    // brideFather: {
-    //   bank: '은행명',
-    //   accountNumber: '000-000-000000',
-    //   holder: '신락현',
-    // },
-    // brideMother: {
-    //   bank: '은행명',
-    //   accountNumber: '000-000-000000',
-    //   holder: '곽광숙',
-    // },
-  },
-
-  // ===== 갤러리 이미지 =====
-  // public 폴더에 이미지 추가 후 여기에 경로 입력
-  gallery: [
-    '/gallery_1.jpg',
-    '/gallery_2.jpg',
-    '/gallery_3.jpg',
-    '/gallery_4.jpg',
-  ],
-
-  // ===== 픽셀아트/메인 이미지 =====
-  pixelArt: '/pixel_art.gif',
-
-  // ===== 우리의 이야기 (픽셀아트 아래 텍스트) =====
+  // ============================================================
+  // 9. 우리의 이야기 (픽셀아트 아래)
+  // ============================================================
   ourStory: [
     {
       text: [
@@ -178,5 +154,50 @@ export const config = {
       author: '신부',
     },
   ],
-};
 
+  // ============================================================
+  // 10. 갤러리 이미지
+  // ============================================================
+  gallery: [
+    '/gallery_1.jpg',
+    '/gallery_2.jpg',
+    '/gallery_3.jpg',
+    '/gallery_4.jpg',
+  ],
+  pixelArt: '/pixel_art.gif',
+
+  // ============================================================
+  // 11. 계좌 정보
+  // ============================================================
+  accounts: {
+    groom: {
+      bank: '신한은행',
+      accountNumber: '110-482-263062',
+      holder: '이아롬',
+    },
+    bride: {
+      bank: '예시은행',
+      accountNumber: '987-654-321098',
+      holder: '신경륜',
+    },
+  },
+
+  // ============================================================
+  // 12. 버튼/UI 텍스트
+  // ============================================================
+  ui: {
+    copyAccount: '계좌번호 복사',
+    copiedAccount: '✓ 복사되었습니다!',
+    touchToEnlarge: '터치하여 확대',
+    close: '닫기',
+  },
+
+  // ============================================================
+  // 13. 푸터
+  // ============================================================
+  footer: {
+    message: 'Made with ♥',
+    repository: 'https://github.com/RomRyun/Invitation',
+    showRepository: true,  // GitHub 링크 표시 여부
+  },
+};
