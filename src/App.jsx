@@ -351,32 +351,32 @@ END:VCALENDAR`;
         >
           <motion.div 
             style={{ 
-              fontFamily: "'Playfair Display', 'Cormorant Garamond', serif",
-              fontSize: '2.5rem', 
-              letterSpacing: '0.15em', 
+              fontFamily: "'Great Vibes', 'Pinyon Script', cursive",
+              fontSize: '3rem', 
+              letterSpacing: '0.05em', 
               color: theme.accentSolid, 
-              fontWeight: 600,
+              fontWeight: 400,
               textAlign: 'left',
-              lineHeight: 1.1
+              lineHeight: 1.2
             }}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-          >WEDDING</motion.div>
+          >Wedding</motion.div>
           <motion.div 
             style={{ 
-              fontFamily: "'Playfair Display', 'Cormorant Garamond', serif",
-              fontSize: '2.5rem', 
-              letterSpacing: '0.15em', 
+              fontFamily: "'Great Vibes', 'Pinyon Script', cursive",
+              fontSize: '3rem', 
+              letterSpacing: '0.05em', 
               color: theme.accentSolid, 
-              fontWeight: 600,
+              fontWeight: 400,
               textAlign: 'right',
-              lineHeight: 1.1
+              lineHeight: 1.2
             }}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-          >INVITATION</motion.div>
+          >Invitation</motion.div>
         </motion.div>
 
         {/* 중앙: 신랑 신부 이름 + 날짜 */}
@@ -404,11 +404,11 @@ END:VCALENDAR`;
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <span style={{ 
-              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
-              fontSize: '2rem', 
+              fontFamily: "'KCC-Eunyoung', 'RIDIBatang', serif",
+              fontSize: '2.25rem', 
               fontWeight: 400, 
               color: '#374151', 
-              letterSpacing: '0.1em'
+              letterSpacing: '0.15em'
             }}>{config.groom.name}</span>
             <motion.span 
               style={{ 
@@ -426,11 +426,11 @@ END:VCALENDAR`;
               }}
             >♥</motion.span>
             <span style={{ 
-              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
-              fontSize: '2rem', 
+              fontFamily: "'KCC-Eunyoung', 'RIDIBatang', serif",
+              fontSize: '2.25rem', 
               fontWeight: 400, 
               color: '#374151',
-              letterSpacing: '0.1em'
+              letterSpacing: '0.15em'
             }}>{config.bride.name}</span>
           </motion.div>
 
@@ -528,13 +528,13 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
-              fontSize: '1.5rem',
+              fontFamily: "'KCC-Eunyoung', 'RIDIBatang', serif",
+              fontSize: '1.75rem',
               fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
-              letterSpacing: '0.05em'
+              letterSpacing: '0.1em'
             }}>{config.greeting.title}</h2>
             <div style={{ 
               display: 'flex',
@@ -594,13 +594,13 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
-              fontSize: '1.5rem',
+              fontFamily: "'KCC-Eunyoung', 'RIDIBatang', serif",
+              fontSize: '1.75rem',
               fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
-              letterSpacing: '0.05em'
+              letterSpacing: '0.1em'
             }}>우리의 이야기</h2>
             <div style={{
               display: 'flex',
@@ -680,13 +680,13 @@ END:VCALENDAR`;
       <section id="gallery" className="py-16">
         <div className="container">
           <h2 style={{
-            fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
-            fontSize: '1.5rem',
+            fontFamily: "'KCC-Eunyoung', 'RIDIBatang', serif",
+            fontSize: '1.75rem',
             fontWeight: 400,
             textAlign: 'center',
             marginBottom: '2rem',
             color: '#374151',
-            letterSpacing: '0.05em'
+            letterSpacing: '0.1em'
           }}>갤러리</h2>
           <div style={{
             backdropFilter: 'blur(24px)',
@@ -914,13 +914,13 @@ END:VCALENDAR`;
             transition={{ duration: 0.6 }}
           >
             <h2 style={{
-              fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
-              fontSize: '1.5rem',
+              fontFamily: "'KCC-Eunyoung', 'RIDIBatang', serif",
+              fontSize: '1.75rem',
               fontWeight: 400,
               textAlign: 'center',
               marginBottom: '2rem',
               color: '#374151',
-              letterSpacing: '0.05em'
+              letterSpacing: '0.1em'
             }}>오시는 길</h2>
             <div style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#4b5563' }}>
               <p style={{ fontSize: '1rem', fontWeight: 300, marginBottom: '0.5rem' }}>{config.venue.name}</p>
@@ -1277,13 +1277,13 @@ END:VCALENDAR`;
       <section id="account" className="py-16">
         <div className="container">
           <h2 style={{
-            fontFamily: "'Gowun Dodum', 'NanumSquareRound', sans-serif",
-            fontSize: '1.5rem',
+            fontFamily: "'KCC-Eunyoung', 'RIDIBatang', serif",
+            fontSize: '1.75rem',
             fontWeight: 400,
             textAlign: 'center',
             marginBottom: '2rem',
             color: '#374151',
-            letterSpacing: '0.05em'
+            letterSpacing: '0.1em'
           }}>마음 전하실 곳</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {/* 신랑측 계좌 */}

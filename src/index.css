@@ -1,42 +1,53 @@
-/* 고운돋움 - 둥글둥글한 고딕 (Google Fonts) */
+/* ===== 아티스틱 / 캘리그라피 폰트 ===== */
+
+/* KCC 은영 - 붓 캘리그라피 (제목, 이름용) */
+@font-face {
+  font-family: 'KCC-Eunyoung';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 여기어때 잘난체 - 감각적 손글씨 */
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 나눔손글씨 펜 - 부드러운 펜글씨 */
+@font-face {
+  font-family: 'NanumPen';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 리디바탕 - 세련된 세리프 */
+@font-face {
+  font-family: 'RIDIBatang';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 고운돋움 - 둥글둥글한 고딕 (본문용) */
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
-/* 나눔스퀘어라운드 - 둥근 모서리 */
-@font-face {
-  font-family: 'NanumSquareRound';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'NanumSquareRound';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRoundB.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'NanumSquareRound';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRoundEB.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
-}
+/* 영문 캘리그라피 - Great Vibes */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
-/* 카페24 아네모네 - 귀엽고 둥근 손글씨 */
-@font-face {
-  font-family: 'Cafe24Anemone';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Ssurroundair.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
+/* 영문 캘리그라피 - Pinyon Script */
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
 
-/* 프리텐다드 - 깔끔한 고딕 */
+/* 영문 캘리그라피 - Dancing Script */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+/* 프리텐다드 - 깔끔한 본문용 */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
-/* 나눔명조 - 클래식 세리프 */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
-
-/* 영문 세리프 */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+/* Playfair Display - 클래식 영문 세리프 */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
 
 * {
@@ -46,7 +57,7 @@
 }
 
 :root {
-  font-family: 'Gowun Dodum', 'NanumSquareRound', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Gowun Dodum', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   font-weight: 400;
