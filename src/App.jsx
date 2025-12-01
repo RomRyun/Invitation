@@ -352,30 +352,30 @@ END:VCALENDAR`;
           <motion.div 
             style={{ 
               fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
-              fontSize: '2.5rem', 
-              letterSpacing: '0.15em', 
+              fontSize: '2.75rem', 
+              letterSpacing: '0.3em', 
               color: theme.accentSolid, 
               fontWeight: 400,
-              textAlign: 'left',
-              lineHeight: 1.2
+              textAlign: 'center',
+              lineHeight: 1.4
             }}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >{config.hero.titleLine1}</motion.div>
           {config.hero.titleLine2 && (
             <motion.div 
               style={{ 
                 fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
-                fontSize: '2.5rem', 
-                letterSpacing: '0.15em', 
+                fontSize: '2.75rem', 
+                letterSpacing: '0.3em', 
                 color: theme.accentSolid, 
                 fontWeight: 400,
-                textAlign: 'right',
-                lineHeight: 1.2
+                textAlign: 'center',
+                lineHeight: 1.4
               }}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >{config.hero.titleLine2}</motion.div>
           )}

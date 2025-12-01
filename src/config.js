@@ -42,8 +42,8 @@ export const config = {
   // ============================================================
   hero: {
     // 메인 타이틀 (영문 또는 한글)
-    titleLine1: 'Wedding',        // 첫 줄 (예: 'Wedding', '결혼합니다', '저희 결혼합니다')
-    titleLine2: 'Invitation',     // 둘째 줄 (예: 'Invitation', '', '청첩장')
+    titleLine1: '우리',            // 첫 줄
+    titleLine2: '결혼해요',         // 둘째 줄
     // 배경 이미지
     backgroundImage: '/bg.jpg',
     backgroundOpacity: 0.5,       // 0.0 ~ 1.0
