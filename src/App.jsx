@@ -1420,25 +1420,28 @@ END:VCALENDAR`;
         <div className="container">
           <p style={{ marginBottom: '0.375rem', fontSize: '0.875rem', fontWeight: 300 }}>{config.groom.name} ♥ {config.bride.name}</p>
           <p style={{ marginBottom: '1.5rem', fontSize: '0.75rem', fontWeight: 300 }}>{config.wedding.year} {config.wedding.monthDay}</p>
-          <p style={{ fontSize: '0.75rem', fontWeight: 300 }}>{config.footer.message}</p>
-          {config.footer.showRepository && config.footer.repository && (
-            <a 
-              href={config.footer.repository} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{ 
-                fontSize: '0.75rem', 
-                fontWeight: 300, 
-                color: '#9ca3af',
-                textDecoration: 'underline',
-                transition: 'color 200ms'
-              }}
-              onMouseEnter={(e) => e.target.style.color = theme.accentSolid}
-              onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
-            >
-              GitHub
-            </a>
-          )}
+          <p style={{ fontSize: '0.75rem', fontWeight: 300 }}>
+            {config.footer.message}
+            {config.footer.showRepository && config.footer.repository && (
+              <>
+                {' '}
+                <a 
+                  href={config.footer.repository} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ 
+                    color: '#9ca3af',
+                    textDecoration: 'underline',
+                    transition: 'color 200ms'
+                  }}
+                  onMouseEnter={(e) => e.target.style.color = theme.accentSolid}
+                  onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+                >
+                  GitHub
+                </a>
+              </>
+            )}
+          </p>
         </div>
       </footer>
 
