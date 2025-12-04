@@ -1,5 +1,14 @@
 /* ===== 우아하고 세련된 폰트 ===== */
 
+/* 학교안심 퍼즐 블랙 - 타이틀용 캘리그라피 */
+@font-face {
+  font-family: 'HakgyoansimPuzzle';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimPuzzleTTF-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* 마포꽃섬 - 부드럽고 우아한 한글 */
 @font-face {
   font-family: 'MapoFlowerIsland';

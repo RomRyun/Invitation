@@ -356,11 +356,11 @@ END:VCALENDAR`;
         >
           <motion.div 
             style={{ 
-              fontFamily: "'BMKiranghaerang', 'Suncheon', 'NanumBrush', sans-serif",
+              fontFamily: "'HakgyoansimPuzzle', 'BMKiranghaerang', sans-serif",
               fontSize: '3.5rem', 
-              letterSpacing: '0.02em', 
+              letterSpacing: '0.05em', 
               color: theme.accentSolid, 
-              fontWeight: 400,
+              fontWeight: 900,
               textAlign: 'center',
               lineHeight: 1.3
             }}
@@ -371,11 +371,11 @@ END:VCALENDAR`;
           {config.hero.titleLine2 && (
             <motion.div 
               style={{ 
-                fontFamily: "'BMKiranghaerang', 'Suncheon', 'NanumBrush', sans-serif",
+                fontFamily: "'HakgyoansimPuzzle', 'BMKiranghaerang', sans-serif",
                 fontSize: '3.5rem', 
-                letterSpacing: '0.02em', 
+                letterSpacing: '0.05em', 
                 color: theme.accentSolid, 
-                fontWeight: 400,
+                fontWeight: 900,
                 textAlign: 'center',
                 lineHeight: 1.3
               }}
