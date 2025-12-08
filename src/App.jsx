@@ -102,9 +102,10 @@ function App() {
     const diffY = startY - currentY;
 
     // 수평 이동이 수직 이동보다 크면 스와이프로 판단
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 20) {
       touchMoved.current = true;
-      if (Math.abs(diffX) > 50) {
+      // 더 민감한 스와이프 감지 (애플 스타일)
+      if (Math.abs(diffX) > 40) {
         if (diffX > 0 && currentImageIndex < galleryImages.length - 1) {
           setCurrentImageIndex(currentImageIndex + 1);
           setIsDragging(false);
@@ -138,11 +139,12 @@ function App() {
     const currentX = e.clientX;
     const diffX = startX - currentX;
 
-    if (Math.abs(diffX) > 30) {
+    if (Math.abs(diffX) > 20) {
       touchMoved.current = true;
     }
 
-    if (Math.abs(diffX) > 50) {
+    // 더 부드러운 마우스 드래그 감지
+    if (Math.abs(diffX) > 40) {
       if (diffX > 0 && currentImageIndex < galleryImages.length - 1) {
         setCurrentImageIndex(currentImageIndex + 1);
         setIsDragging(false);
@@ -214,6 +216,7 @@ END:VCALENDAR`;
       minHeight: '100vh', 
       background: theme.bgGradient 
     }}>
+      <div className="page-container">
       {/* 이미지 확대 모달 */}
       <AnimatePresence>
         {showModal && (
@@ -298,13 +301,14 @@ END:VCALENDAR`;
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section style={{
+      {/* Hero Section - 표지 페이지 */}
+      <section className="page page-cover" style={{
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        isolation: 'isolate'
       }}>
         {/* 배경 이미지 */}
         {config.hero?.useBackgroundImage && (
@@ -313,29 +317,26 @@ END:VCALENDAR`;
             inset: 0,
             display: 'flex',
             justifyContent: 'center',
-            opacity: config.hero.backgroundOpacity || 0.3
+            alignItems: 'center',
+            opacity: config.hero.backgroundOpacity || 0.3,
+            zIndex: 0
           }}>
             <div style={{
-              width: 'auto',
+              width: '100%',
               height: '100%',
-              aspectRatio: '3/4',
-              maxWidth: '100%',
               backgroundImage: `url(${config.hero.backgroundImage})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center top',
-              backgroundRepeat: 'no-repeat'
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              filter: 'blur(0.5px)'
             }}></div>
           </div>
         )}
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: theme.bgOverlay
-        }}></div>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 50%)'
+          background: theme.bgOverlay,
+          zIndex: 1
         }}></div>
         
         {/* 상단: WEDDING INVITATION */}
@@ -344,11 +345,11 @@ END:VCALENDAR`;
           style={{
             position: 'relative',
             zIndex: 10,
-            paddingTop: '2.5rem',
+            paddingTop: '3rem',
             paddingLeft: '1.5rem',
             paddingRight: '1.5rem',
             width: '100%',
-            maxWidth: '420px',
+            maxWidth: '600px',
             margin: '0 auto',
             textAlign: 'center'
           }}
@@ -356,17 +357,17 @@ END:VCALENDAR`;
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          {/* 메인 캘리그라피 타이틀 */}
+          {/* 메인 타이틀 - 세련된 도시 스타일 */}
           <motion.div 
             style={{ 
-              fontFamily: "'NanumBrush', 'Suncheon', cursive",
-              fontSize: '4rem', 
-              letterSpacing: '0.08em', 
-              color: theme.accentSolid, 
-              fontWeight: 400,
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: 'clamp(2.5rem, 7vw, 4.5rem)', 
+              letterSpacing: '-0.02em', 
+              color: theme.textPrimary, 
+              fontWeight: 300,
               textAlign: 'center',
-              lineHeight: 1.2,
-              textShadow: '2px 2px 4px rgba(0,0,0,0.08)'
+              lineHeight: 1.15,
+              textShadow: 'none'
             }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -387,7 +388,8 @@ END:VCALENDAR`;
           alignItems: 'center', 
           justifyContent: 'center',
           position: 'relative',
-          zIndex: 10
+          zIndex: 10,
+          padding: '2rem 1.5rem'
         }}>
           {/* 이름 */}
           <motion.div
@@ -403,14 +405,16 @@ END:VCALENDAR`;
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '1rem'
+              gap: '1.5rem',
+              flexWrap: 'wrap'
             }}>
               <span style={{ 
-                fontFamily: "'Gowun Batang', 'Nanum Myeongjo', serif",
-                fontSize: '1.75rem', 
+                fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+                fontSize: 'clamp(1.25rem, 3.5vw, 1.75rem)', 
                 fontWeight: 400, 
-                color: '#374151', 
-                letterSpacing: '0.2em'
+                color: theme.textPrimary, 
+                letterSpacing: '0.05em',
+                textShadow: 'none'
               }}>{config.groom.name}</span>
               <motion.span 
                 style={{ 
@@ -427,11 +431,12 @@ END:VCALENDAR`;
                 }}
               >♥</motion.span>
               <span style={{ 
-                fontFamily: "'Gowun Batang', 'Nanum Myeongjo', serif",
-                fontSize: '1.75rem', 
+                fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+                fontSize: 'clamp(1.25rem, 3.5vw, 1.75rem)', 
                 fontWeight: 400, 
-                color: '#374151',
-                letterSpacing: '0.2em'
+                color: theme.textPrimary,
+                letterSpacing: '0.05em',
+                textShadow: 'none'
               }}>{config.bride.name}</span>
             </div>
           </motion.div>
@@ -447,24 +452,26 @@ END:VCALENDAR`;
           >
             {/* 년월일 */}
             <div style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '1.1rem',
-              fontWeight: 400,
-              color: '#6b7280',
-              letterSpacing: '0.1em',
-              marginBottom: '0.25rem'
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: 'clamp(0.9375rem, 2.5vw, 1.125rem)',
+              fontWeight: 300,
+              color: theme.textSecondary,
+              letterSpacing: '0.02em',
+              marginBottom: '0.375rem',
+              textShadow: 'none'
             }}>
-              2026. 04. 18
+              {config.wedding.year} {config.wedding.monthDay}
             </div>
             {/* 요일 시간 */}
             <div style={{ 
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '0.9rem', 
-              fontWeight: 400,
-              letterSpacing: '0.15em',
-              color: '#9ca3af'
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: 'clamp(0.8125rem, 2vw, 0.9375rem)', 
+              fontWeight: 300,
+              letterSpacing: '0.02em',
+              color: theme.textTertiary,
+              textShadow: 'none'
             }}>
-              SAT. PM 1:00
+              {config.wedding.dayOfWeek} {config.wedding.timeText}
             </div>
           </motion.div>
 
@@ -479,11 +486,12 @@ END:VCALENDAR`;
             transition={{ duration: 0.8, delay: 1 }}
           >
             <div style={{ 
-              fontFamily: "'KyoboHandwriting2021sjy', 'Gowun Dodum', sans-serif",
-              fontSize: '0.95rem', 
-              color: '#4b5563', 
-              fontWeight: 400,
-              letterSpacing: '0.05em'
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: 'clamp(0.8125rem, 2vw, 0.9375rem)', 
+              color: theme.textSecondary, 
+              fontWeight: 300,
+              letterSpacing: '0.02em',
+              textShadow: 'none'
             }}>
               {config.venue.name} {config.venue.branch}
             </div>
@@ -509,41 +517,43 @@ END:VCALENDAR`;
         </motion.div>
       </section>
 
-      {/* 인사말 Section */}
-      <section id="greeting" className="py-16">
+      {/* 인사말 Section - 페이지 1 */}
+      <section id="greeting" className="page page-left">
         <div className="container">
           <motion.div
             style={{
               backdropFilter: 'blur(24px)',
               WebkitBackdropFilter: 'blur(24px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.6)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.8)'
+              backgroundColor: 'rgba(255, 255, 255, 0.7)',
+              borderRadius: '1.5rem',
+              padding: '3rem 2.5rem',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.08)',
+              border: '1px solid rgba(255, 255, 255, 0.9)',
+              maxWidth: '100%'
             }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <h2 style={{
-              fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
               fontSize: '1.5rem',
-              fontWeight: 400,
+              fontWeight: 500,
               textAlign: 'center',
-              marginBottom: '2rem',
-              color: '#374151',
-              letterSpacing: '0.15em'
+              marginBottom: '2.5rem',
+              color: theme.textPrimary,
+              letterSpacing: '-0.01em'
             }}>{config.sectionTitles.greeting}</h2>
             <div style={{ 
               display: 'flex',
               flexDirection: 'column',
-              gap: '1rem',
-              color: '#4b5563',
-              lineHeight: 1.625,
-              fontSize: '0.9375rem',
-              textAlign: 'center'
+              gap: '1.5rem',
+              color: theme.textSecondary,
+              lineHeight: 1.75,
+              fontSize: '1rem',
+              textAlign: 'center',
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
             }}>
               <p style={{ fontWeight: 300 }}>
                 {config.greeting.message.map((line, i) => (
@@ -557,15 +567,16 @@ END:VCALENDAR`;
               </p>
             </div>
             <div style={{
-              marginTop: '2.5rem',
-              paddingTop: '1.5rem',
-              borderTop: '1px solid rgba(229, 231, 235, 0.6)',
+              marginTop: '3rem',
+              paddingTop: '2rem',
+              borderTop: `1px solid ${theme.cardBorder}`,
               textAlign: 'center',
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.5rem',
-              color: '#4b5563',
-              fontSize: '0.875rem'
+              gap: '0.75rem',
+              color: theme.textSecondary,
+              fontSize: '0.875rem',
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
             }}>
               <p style={{ fontWeight: 300 }}>{config.groom.fatherName} · {config.groom.motherName}의 {config.groom.relation} {config.groom.name}</p>
               <p style={{ fontWeight: 300 }}>{config.bride.fatherName} · {config.bride.motherName}의 {config.bride.relation} {config.bride.name}</p>
@@ -574,33 +585,32 @@ END:VCALENDAR`;
         </div>
       </section>
 
-      {/* 픽셀아트 Section */}
-      <section id="story" className="py-16">
+      {/* 픽셀아트 Section - 페이지 2 */}
+      <section id="story" className="page page-right">
         <div className="container">
           <motion.div
             style={{
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.6)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.8)',
-              overflow: 'hidden'
+              backgroundColor: theme.cardBg,
+              borderRadius: '0.75rem',
+              padding: '4rem 3rem',
+              boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05), 0 1px 2px -1px rgba(0,0,0,0.05)',
+              border: `1px solid ${theme.cardBorder}`,
+              overflow: 'hidden',
+              maxWidth: '100%'
             }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <h2 style={{
-              fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
               fontSize: '1.5rem',
-              fontWeight: 400,
+              fontWeight: 500,
               textAlign: 'center',
-              marginBottom: '2rem',
-              color: '#374151',
-              letterSpacing: '0.15em'
+              marginBottom: '2.5rem',
+              color: theme.textPrimary,
+              letterSpacing: '-0.01em'
             }}>{config.sectionTitles.story}</h2>
             <div style={{
               display: 'flex',
@@ -614,8 +624,8 @@ END:VCALENDAR`;
                 style={{
                   maxWidth: '100%',
                   height: 'auto',
-                  borderRadius: '0.75rem',
-                  boxShadow: '0 4px 16px 0 rgba(0,0,0,0.08)'
+                  borderRadius: '0.5rem',
+                  boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05)'
                 }}
                 onError={(e) => {
                   e.target.style.display = 'none';
@@ -642,31 +652,32 @@ END:VCALENDAR`;
             {/* 우리의 이야기 텍스트 */}
             {config.ourStory && config.ourStory.length > 0 && (
               <div style={{ 
-                marginTop: '2rem',
-                paddingTop: '1.5rem',
-                borderTop: '1px solid rgba(229, 231, 235, 0.6)',
+                marginTop: '3rem',
+                paddingTop: '2rem',
+                borderTop: `1px solid ${theme.cardBorder}`,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.5rem'
+                gap: '2rem'
               }}>
                 {config.ourStory.map((story, idx) => (
                   <div key={idx} style={{ textAlign: 'center' }}>
                     <div style={{ 
-                      color: '#4b5563', 
-                      fontSize: '0.9375rem', 
-                      lineHeight: 1.8,
+                      color: theme.textSecondary, 
+                      fontSize: '1rem', 
+                      lineHeight: 1.75,
                       fontWeight: 300,
-                      fontStyle: 'italic'
+                      fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
                     }}>
                       {story.text.map((line, lineIdx) => (
                         <p key={lineIdx}>{line}</p>
                       ))}
                     </div>
                     <p style={{ 
-                      marginTop: '0.75rem', 
-                      color: '#6b7280', 
-                      fontSize: '0.8125rem',
-                      fontWeight: 400
+                      marginTop: '1rem', 
+                      color: theme.textTertiary, 
+                      fontSize: '0.875rem',
+                      fontWeight: 400,
+                      fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
                     }}>— {story.author}</p>
                   </div>
                 ))}
@@ -676,26 +687,25 @@ END:VCALENDAR`;
         </div>
       </section>
 
-      {/* 갤러리 Section */}
-      <section id="gallery" className="py-16">
+      {/* 갤러리 Section - 페이지 3 */}
+      <section id="gallery" className="page page-left">
         <div className="container">
           <h2 style={{
-            fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
+            fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
             fontSize: '1.5rem',
-            fontWeight: 400,
+            fontWeight: 500,
             textAlign: 'center',
-            marginBottom: '2rem',
-            color: '#374151',
-            letterSpacing: '0.15em'
+            marginBottom: '2.5rem',
+            color: theme.textPrimary,
+            letterSpacing: '-0.01em'
           }}>{config.sectionTitles.gallery}</h2>
           <div style={{
-            backdropFilter: 'blur(24px)',
-            WebkitBackdropFilter: 'blur(24px)',
-            backgroundColor: 'rgba(255, 255, 255, 0.6)',
-            borderRadius: '1rem',
-            padding: '1rem',
-            boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
-            border: '1px solid rgba(255, 255, 255, 0.8)'
+            backgroundColor: theme.cardBg,
+            borderRadius: '0.75rem',
+            padding: '1.5rem',
+            boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05), 0 1px 2px -1px rgba(0,0,0,0.05)',
+            border: `1px solid ${theme.cardBorder}`,
+            maxWidth: '100%'
           }}>
             <div 
               style={{
@@ -730,8 +740,9 @@ END:VCALENDAR`;
                     right: 0,
                     bottom: 0,
                     display: 'flex',
-                    transition: 'transform 300ms ease-out',
-                    transform: `translateX(-${currentImageIndex * 100}%)`
+                    transition: 'transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transform: `translateX(-${currentImageIndex * 100}%)`,
+                    willChange: 'transform'
                   }}
                 >
                   {galleryImages.map((image, index) => (
@@ -788,15 +799,18 @@ END:VCALENDAR`;
               {/* 터치 힌트 */}
               <div style={{
                 position: 'absolute',
-                bottom: '0.75rem',
+                bottom: '1rem',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
                 color: 'white',
-                fontSize: '0.625rem',
-                padding: '0.25rem 0.75rem',
+                fontSize: '0.6875rem',
+                padding: '0.375rem 0.875rem',
                 borderRadius: '9999px',
-                pointerEvents: 'none'
+                pointerEvents: 'none',
+                fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+                fontWeight: 400,
+                letterSpacing: '0.01em'
               }}>
                 터치하여 확대
               </div>
@@ -816,16 +830,17 @@ END:VCALENDAR`;
                     width: '2.5rem',
                     height: '2.5rem',
                     borderRadius: '50%',
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    border: 'none',
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    border: `1px solid ${theme.cardBorder}`,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                    color: '#374151',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                    color: theme.textPrimary,
                     fontSize: '1.25rem',
-                    fontWeight: 300
+                    fontWeight: 300,
+                    fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
                   }}
                 >
                   ‹
@@ -845,16 +860,17 @@ END:VCALENDAR`;
                     width: '2.5rem',
                     height: '2.5rem',
                     borderRadius: '50%',
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                    border: 'none',
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    border: `1px solid ${theme.cardBorder}`,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                    color: '#374151',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                    color: theme.textPrimary,
                     fontSize: '1.25rem',
-                    fontWeight: 300
+                    fontWeight: 300,
+                    fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
                   }}
                 >
                   ›
@@ -895,45 +911,44 @@ END:VCALENDAR`;
         </div>
       </section>
 
-      {/* 오시는 길 Section */}
-      <section id="location" className="py-16">
+      {/* 오시는 길 Section - 페이지 4 */}
+      <section id="location" className="page page-right">
         <div className="container">
           <motion.div
             style={{
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.6)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.8)'
+              backgroundColor: theme.cardBg,
+              borderRadius: '0.75rem',
+              padding: '4rem 3rem',
+              boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05), 0 1px 2px -1px rgba(0,0,0,0.05)',
+              border: `1px solid ${theme.cardBorder}`,
+              maxWidth: '100%'
             }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <h2 style={{
-              fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
+              fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
               fontSize: '1.5rem',
-              fontWeight: 400,
+              fontWeight: 500,
               textAlign: 'center',
-              marginBottom: '2rem',
-              color: '#374151',
-              letterSpacing: '0.15em'
+              marginBottom: '2.5rem',
+              color: theme.textPrimary,
+              letterSpacing: '-0.01em'
             }}>{config.sectionTitles.location}</h2>
-            <div style={{ marginBottom: '1.5rem', textAlign: 'center', color: '#4b5563' }}>
-              <p style={{ fontSize: '1rem', fontWeight: 300, marginBottom: '0.5rem' }}>{config.venue.name} {config.venue.branch}</p>
+            <div style={{ marginBottom: '2rem', textAlign: 'center', color: theme.textSecondary, fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+              <p style={{ fontSize: '1.125rem', fontWeight: 400, marginBottom: '0.5rem' }}>{config.venue.name} {config.venue.branch}</p>
               {config.venue.hall && (
-                <p style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: 300, marginBottom: '0.5rem' }}>{config.venue.hall}</p>
+                <p style={{ fontSize: '0.9375rem', color: theme.textTertiary, fontWeight: 300, marginBottom: '0.5rem' }}>{config.venue.hall}</p>
               )}
-              <p style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: 300, marginBottom: '1rem' }}>{config.wedding.year} {config.wedding.monthDay} {config.wedding.dayOfWeek} {config.wedding.timeText}</p>
-              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.875rem', color: '#4b5563', fontWeight: 300 }}>
-                <p style={{ marginBottom: '0.75rem', fontWeight: 400 }}>주소</p>
-                <p style={{ lineHeight: 1.625 }}>
+              <p style={{ fontSize: '0.9375rem', color: theme.textTertiary, fontWeight: 300, marginBottom: '1.5rem' }}>{config.wedding.year} {config.wedding.monthDay} {config.wedding.dayOfWeek} {config.wedding.timeText}</p>
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.9375rem', color: theme.textSecondary, fontWeight: 300 }}>
+                <p style={{ marginBottom: '0.75rem', fontWeight: 500 }}>주소</p>
+                <p style={{ lineHeight: 1.75 }}>
                   {config.venue.address}<br />
                   {config.venue.addressDetail && (
-                    <span style={{ color: '#6b7280' }}>{config.venue.addressDetail}</span>
+                    <span style={{ color: theme.textTertiary }}>{config.venue.addressDetail}</span>
                   )}
                 </p>
               </div>
@@ -941,11 +956,11 @@ END:VCALENDAR`;
             
             {/* 지도 이미지 */}
             <div style={{
-              borderRadius: '0.75rem',
+              borderRadius: '0.5rem',
               overflow: 'hidden',
-              boxShadow: '0 4px 16px 0 rgba(0,0,0,0.08)',
-              marginBottom: '1rem',
-              backgroundColor: '#f3f4f6'
+              boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05)',
+              marginBottom: '1.5rem',
+              backgroundColor: '#f5f5f5'
             }}>
               <img 
                 src={config.maps.image}
@@ -981,11 +996,11 @@ END:VCALENDAR`;
             <div style={{
               display: 'flex',
               justifyContent: 'center',
-              gap: '0.25rem',
-              marginBottom: '1rem',
-              backgroundColor: 'rgba(255, 255, 255, 0.5)',
-              borderRadius: '0.75rem',
-              padding: '0.25rem'
+              gap: '0.375rem',
+              marginBottom: '1.5rem',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '0.5rem',
+              padding: '0.375rem'
             }}>
               {mapTabs.map((tab) => (
                 <button
@@ -994,15 +1009,16 @@ END:VCALENDAR`;
                   style={{
                     flex: 1,
                     padding: '0.625rem 0.5rem',
-                    borderRadius: '0.5rem',
+                    borderRadius: '0.375rem',
                     border: 'none',
                     backgroundColor: activeMapTab === tab.id ? 'white' : 'transparent',
-                    color: activeMapTab === tab.id ? '#374151' : '#6b7280',
-                    fontSize: '0.8125rem',
-                    fontWeight: activeMapTab === tab.id ? 500 : 300,
+                    color: activeMapTab === tab.id ? theme.textPrimary : theme.textSecondary,
+                    fontSize: '0.875rem',
+                    fontWeight: activeMapTab === tab.id ? 500 : 400,
                     cursor: 'pointer',
                     transition: 'all 200ms',
-                    boxShadow: activeMapTab === tab.id ? '0 2px 8px rgba(0,0,0,0.1)' : 'none'
+                    fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+                    boxShadow: activeMapTab === tab.id ? '0 1px 2px rgba(0,0,0,0.05)' : 'none'
                   }}
                 >
                   {tab.label}
@@ -1163,8 +1179,8 @@ END:VCALENDAR`;
             }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <h2 style={{
               fontSize: '1.5rem',
@@ -1273,42 +1289,42 @@ END:VCALENDAR`;
       </section>
       */}
 
-      {/* 계좌번호 Section */}
-      <section id="account" className="py-16">
+      {/* 계좌번호 Section - 페이지 5 */}
+      <section id="account" className="page page-left">
         <div className="container">
           <h2 style={{
-            fontFamily: "'MapoFlowerIsland', 'Gowun Batang', serif",
+            fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
             fontSize: '1.5rem',
-            fontWeight: 400,
+            fontWeight: 500,
             textAlign: 'center',
-            marginBottom: '1.5rem',
-            color: '#374151',
-            letterSpacing: '0.15em'
+            marginBottom: '2.5rem',
+            color: theme.textPrimary,
+            letterSpacing: '-0.01em'
           }}>{config.sectionTitles.account}</h2>
           
           <motion.div
             style={{
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.6)',
-              borderRadius: '1rem',
-              padding: '1.25rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.8)'
+              backgroundColor: theme.cardBg,
+              borderRadius: '0.75rem',
+              padding: '2.5rem 2rem',
+              boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05), 0 1px 2px -1px rgba(0,0,0,0.05)',
+              border: `1px solid ${theme.cardBorder}`,
+              maxWidth: '100%'
             }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             {/* 신랑측 */}
             <div style={{ marginBottom: '1rem' }}>
               <p style={{ 
-                fontSize: '0.9375rem', 
+                fontSize: '1rem', 
                 fontWeight: 500, 
-                color: '#374151', 
-                marginBottom: '0.75rem',
-                textAlign: 'center'
+                color: theme.textPrimary, 
+                marginBottom: '1rem',
+                textAlign: 'center',
+                fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
               }}>신랑측</p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
                 {[
@@ -1324,24 +1340,25 @@ END:VCALENDAR`;
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      backgroundColor: expandedAccount === item.key ? theme.accentSolid : 'rgba(255,255,255,0.7)',
-                      color: expandedAccount === item.key ? 'white' : '#374151',
-                      borderRadius: '0.75rem',
-                      padding: '0.75rem 0.5rem',
-                      border: 'none',
+                      backgroundColor: expandedAccount === item.key ? theme.accentSolid : '#f5f5f5',
+                      color: expandedAccount === item.key ? 'white' : theme.textPrimary,
+                      borderRadius: '0.5rem',
+                      padding: '0.875rem 0.5rem',
+                      border: expandedAccount === item.key ? 'none' : `1px solid ${theme.cardBorder}`,
                       cursor: 'pointer',
-                      transition: 'all 200ms'
+                      transition: 'all 200ms',
+                      fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
                     }}
                   >
-                    <span style={{ fontSize: '0.6875rem', opacity: 0.8, marginBottom: '0.125rem' }}>{item.role}</span>
-                    <span style={{ fontSize: '0.8125rem', fontWeight: 500 }}>{item.label}</span>
+                    <span style={{ fontSize: '0.75rem', opacity: expandedAccount === item.key ? 0.9 : 0.7, marginBottom: '0.25rem', fontWeight: 400 }}>{item.role}</span>
+                    <span style={{ fontSize: '0.875rem', fontWeight: 500 }}>{item.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* 구분선 */}
-            <div style={{ height: '1px', backgroundColor: 'rgba(0,0,0,0.08)', margin: '0.75rem 0' }} />
+            <div style={{ height: '1px', backgroundColor: theme.cardBorder, margin: '1.5rem 0' }} />
 
             {/* 신부측 */}
             <div style={{ marginBottom: '0.75rem' }}>
@@ -1366,17 +1383,18 @@ END:VCALENDAR`;
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      backgroundColor: expandedAccount === item.key ? theme.accentSolid : 'rgba(255,255,255,0.7)',
-                      color: expandedAccount === item.key ? 'white' : '#374151',
-                      borderRadius: '0.75rem',
-                      padding: '0.75rem 0.5rem',
-                      border: 'none',
+                      backgroundColor: expandedAccount === item.key ? theme.accentSolid : '#f5f5f5',
+                      color: expandedAccount === item.key ? 'white' : theme.textPrimary,
+                      borderRadius: '0.5rem',
+                      padding: '0.875rem 0.5rem',
+                      border: expandedAccount === item.key ? 'none' : `1px solid ${theme.cardBorder}`,
                       cursor: 'pointer',
-                      transition: 'all 200ms'
+                      transition: 'all 200ms',
+                      fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
                     }}
                   >
-                    <span style={{ fontSize: '0.6875rem', opacity: 0.8, marginBottom: '0.125rem' }}>{item.role}</span>
-                    <span style={{ fontSize: '0.8125rem', fontWeight: 500 }}>{item.label}</span>
+                    <span style={{ fontSize: '0.75rem', opacity: expandedAccount === item.key ? 0.9 : 0.7, marginBottom: '0.25rem', fontWeight: 400 }}>{item.role}</span>
+                    <span style={{ fontSize: '0.875rem', fontWeight: 500 }}>{item.label}</span>
                   </button>
                 ))}
               </div>
@@ -1405,20 +1423,21 @@ END:VCALENDAR`;
                     if (!selected) return null;
                     return (
                       <div style={{
-                        backgroundColor: 'rgba(255,255,255,0.9)',
-                        borderRadius: '0.75rem',
-                        padding: '1rem',
-                        marginTop: '0.75rem',
-                        textAlign: 'center'
+                        backgroundColor: '#fafafa',
+                        borderRadius: '0.5rem',
+                        padding: '1.5rem',
+                        marginTop: '1rem',
+                        textAlign: 'center',
+                        border: `1px solid ${theme.cardBorder}`
                       }}>
-                        <p style={{ fontSize: '0.875rem', color: '#374151', fontWeight: 500, marginBottom: '0.75rem' }}>
+                        <p style={{ fontSize: '0.9375rem', color: theme.textPrimary, fontWeight: 500, marginBottom: '1rem', fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" }}>
                           {selected.role} {selected.label}
                         </p>
-                        <p style={{ fontSize: '0.8125rem', color: '#6b7280', marginBottom: '0.25rem' }}>{selected.account.bank}</p>
-                        <p style={{ fontSize: '1.0625rem', color: '#1f2937', fontWeight: 600, marginBottom: '0.25rem', letterSpacing: '0.05em' }}>
+                        <p style={{ fontSize: '0.875rem', color: theme.textSecondary, marginBottom: '0.5rem', fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" }}>{selected.account.bank}</p>
+                        <p style={{ fontSize: '1.125rem', color: theme.textPrimary, fontWeight: 600, marginBottom: '0.5rem', letterSpacing: '0.02em', fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" }}>
                           {selected.account.accountNumber}
                         </p>
-                        <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginBottom: '1rem' }}>예금주: {selected.account.holder}</p>
+                        <p style={{ fontSize: '0.8125rem', color: theme.textTertiary, marginBottom: '1.5rem', fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif" }}>예금주: {selected.account.holder}</p>
                         <button
                           onClick={() => copyToClipboard(`${selected.account.bank} ${selected.account.accountNumber} ${selected.account.holder}`, selected.key)}
                           style={{
@@ -1426,12 +1445,16 @@ END:VCALENDAR`;
                             backgroundColor: theme.accentSolid,
                             color: 'white',
                             borderRadius: '0.5rem',
-                            padding: '0.75rem',
-                            fontSize: '0.875rem',
+                            padding: '0.875rem',
+                            fontSize: '0.9375rem',
                             fontWeight: 500,
                             border: 'none',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif",
+                            transition: 'all 200ms'
                           }}
+                          onMouseEnter={(e) => e.target.style.opacity = '0.9'}
+                          onMouseLeave={(e) => e.target.style.opacity = '1'}
                         >
                           {copied[expandedAccount] ? '✓ 복사 완료!' : '계좌번호 복사하기'}
                         </button>
@@ -1445,12 +1468,21 @@ END:VCALENDAR`;
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={{ padding: '3rem 1rem', textAlign: 'center', color: '#6b7280' }}>
-        <div className="container">
-          <p style={{ marginBottom: '0.375rem', fontSize: '0.875rem', fontWeight: 300 }}>{config.groom.name} ♥ {config.bride.name}</p>
-          <p style={{ marginBottom: '1.5rem', fontSize: '0.75rem', fontWeight: 300 }}>{config.wedding.year} {config.wedding.monthDay}</p>
-          <p style={{ fontSize: '0.75rem', fontWeight: 300 }}>
+      {/* Footer - 페이지 6 */}
+      <footer className="page page-right" style={{ 
+        padding: '3rem 1rem', 
+        textAlign: 'center', 
+        color: theme.textTertiary,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
+      }}>
+        <div className="container" style={{ maxWidth: '100%' }}>
+          <p style={{ marginBottom: '0.5rem', fontSize: '0.9375rem', fontWeight: 400, color: theme.textSecondary }}>{config.groom.name} ♥ {config.bride.name}</p>
+          <p style={{ marginBottom: '2rem', fontSize: '0.8125rem', fontWeight: 300, color: theme.textTertiary }}>{config.wedding.year} {config.wedding.monthDay}</p>
+          <p style={{ fontSize: '0.8125rem', fontWeight: 300, color: theme.textTertiary }}>
             {config.footer.message}
             {config.footer.showRepository && config.footer.repository && (
               <>
@@ -1460,12 +1492,19 @@ END:VCALENDAR`;
                   target="_blank" 
                   rel="noopener noreferrer"
                   style={{ 
-                    color: '#9ca3af',
-                    textDecoration: 'underline',
-                    transition: 'color 200ms'
+                    color: theme.textTertiary,
+                    textDecoration: 'none',
+                    transition: 'color 200ms',
+                    borderBottom: `1px solid ${theme.textTertiary}`
                   }}
-                  onMouseEnter={(e) => e.target.style.color = theme.accentSolid}
-                  onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = theme.accentSolid;
+                    e.target.style.borderBottomColor = theme.accentSolid;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = theme.textTertiary;
+                    e.target.style.borderBottomColor = theme.textTertiary;
+                  }}
                 >
                   GitHub
                 </a>
@@ -1494,13 +1533,11 @@ END:VCALENDAR`;
                 position: 'absolute',
                 bottom: '4rem',
                 right: 0,
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
-                backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                borderRadius: '1rem',
-                padding: '0.75rem 0',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                border: '1px solid rgba(255, 255, 255, 0.8)',
+                backgroundColor: theme.cardBg,
+                borderRadius: '0.75rem',
+                padding: '0.5rem 0',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06)',
+                border: `1px solid ${theme.cardBorder}`,
                 minWidth: '160px',
                 overflow: 'hidden'
               }}
@@ -1516,19 +1553,21 @@ END:VCALENDAR`;
                     textAlign: 'left',
                     backgroundColor: 'transparent',
                     border: 'none',
-                    color: '#374151',
+                    color: theme.textPrimary,
                     fontSize: '0.875rem',
-                    fontWeight: 300,
+                    fontWeight: 400,
                     cursor: 'pointer',
-                    transition: 'background-color 150ms'
+                    transition: 'background-color 150ms',
+                    fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif"
                   }}
-                  onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(0,0,0,0.05)'}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#f5f5f5'}
                   onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                 >
                   <span style={{ 
                     color: theme.accentSolid, 
                     marginRight: '0.5rem',
-                    fontSize: '0.75rem'
+                    fontSize: '0.75rem',
+                    fontWeight: 500
                   }}>{idx + 1}.</span>
                   {item.label}
                 </button>
@@ -1591,6 +1630,7 @@ END:VCALENDAR`;
             )}
           </AnimatePresence>
         </motion.button>
+      </div>
       </div>
     </div>
   );

@@ -4,11 +4,118 @@
   padding: 0;
 }
 
+/* 페이지 컨테이너 - PC에서는 양면, 모바일에서는 세로 스택 */
+.page-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* PC 양면 레이아웃 */
+@media (min-width: 1024px) {
+  .page-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+  
+  .page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .page-left {
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    background: linear-gradient(to right, transparent 99%, rgba(0, 0, 0, 0.02) 100%);
+  }
+  
+  .page-right {
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    background: linear-gradient(to left, transparent 99%, rgba(0, 0, 0, 0.02) 100%);
+  }
+  
+  /* 표지 페이지는 전체 너비 */
+  .page-cover {
+    grid-column: 1 / -1;
+    min-height: 100vh;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+  
+  /* PC에서 컨테이너 내부 여백 조정 */
+  .page .container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+/* 모바일 세로 스택 */
+@media (max-width: 1023px) {
+  .page-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+    border: none;
+    background: none;
+  }
+  
+  /* 모바일에서 페이지 간 구분선 */
+  .page:not(.page-cover):not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent);
+  }
+  
+  /* 모바일 스크롤 스냅 */
+  .page {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+/* 부드러운 스크롤 스냅 */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 1023px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+}
+
 .container {
   width: 100%;
   max-width: 448px;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+/* PC에서는 컨테이너 너비 확장 */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding: 0 2rem;
+  }
 }
 
 .py-16 {
