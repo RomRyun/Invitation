@@ -408,7 +408,7 @@ END:VCALENDAR`;
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: '0.3rem'
+                gap: '0.2rem'
               }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -416,17 +416,18 @@ END:VCALENDAR`;
             >
               <span style={{
                 fontFamily: "'La Paloma', 'Great Vibes', cursive",
-                fontSize: 'clamp(2rem, 6vw, 3rem)',
+                fontSize: 'clamp(1.6rem, 5vw, 2.5rem)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
                 textShadow: '0 2px 25px rgba(0,0,0,0.7)',
-                display: 'block'
+                display: 'block',
+                whiteSpace: 'nowrap'
               }}>
                 Lee Ah-rom
               </span>
               <span style={{
                 fontFamily: "'La Paloma', 'Great Vibes', cursive",
-                fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
+                fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
                 fontWeight: 400,
                 textShadow: '0 2px 25px rgba(0,0,0,0.7)',
                 display: 'block'
@@ -435,11 +436,12 @@ END:VCALENDAR`;
               </span>
               <span style={{
                 fontFamily: "'La Paloma', 'Great Vibes', cursive",
-                fontSize: 'clamp(2rem, 6vw, 3rem)',
+                fontSize: 'clamp(1.6rem, 5vw, 2.5rem)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
                 textShadow: '0 2px 25px rgba(0,0,0,0.7)',
-                display: 'block'
+                display: 'block',
+                whiteSpace: 'nowrap'
               }}>
                 Shin Gyeong-ryun
               </span>
