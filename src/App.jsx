@@ -457,7 +457,7 @@ END:VCALENDAR`;
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              이 아롬 신 경륜의 결혼식에 초대합니다.
+              {config.hero.inviteText}
             </motion.p>
 
             {/* 날짜 */}
