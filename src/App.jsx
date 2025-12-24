@@ -38,19 +38,19 @@ function App() {
   const galleryOpacity = useTransform(galleryScrollProgress, [0, 0.2, 0.8, 1], [0.6, 1, 1, 0.6]);
   const galleryY = useTransform(galleryScrollProgress, [0, 0.5, 1], [50, 0, -30]);
   
-  // 첫 페이지 Hero 섹션 - Zoom out + PNG 마스크 reveal 효과
+  // 첫 페이지 Hero 섹션 - Zoom out + 마스크 reveal 효과
   const heroRef = useRef(null);
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
   
-  // Zoom out 효과: 처음에 확대 → 스크롤하면 전체 이미지로
-  const imageScale = useTransform(heroProgress, [0, 0.6], [1.8, 1]);
-  // 마스크 크기: 0% → 100% (스크롤하면 벗겨짐)
-  const maskSize = useTransform(heroProgress, [0, 0.5], [0, 150]);
-  // 텍스트는 계속 유지
-  const textY = useTransform(heroProgress, [0.6, 0.9], [0, -20]);
+  // Zoom out 효과: 처음에 확대 → 스크롤 30%에서 전체 이미지로
+  const imageScale = useTransform(heroProgress, [0, 0.3], [1.5, 1]);
+  // 마스크 크기: 스크롤 0~30%에서 완전히 드러남
+  const maskSize = useTransform(heroProgress, [0, 0.3], [0, 200]);
+  // 텍스트 위치
+  const textY = useTransform(heroProgress, [0.5, 0.7], [0, -15]);
 
   // 목차 데이터
   const menuItems = [
@@ -328,7 +328,7 @@ END:VCALENDAR`;
       <section 
         ref={heroRef}
         style={{
-          height: '300vh',
+          height: '200vh',
           position: 'relative'
         }}
       >
@@ -387,40 +387,45 @@ END:VCALENDAR`;
               y: textY
             }}
           >
-            {/* 영문 타이틀 - La Paloma */}
+            {/* 영문 타이틀 - La Paloma (세로 배치) */}
             <motion.div
-              style={{ marginBottom: '1.2rem' }}
+              style={{ 
+                marginBottom: '1.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.3rem'
+              }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
             >
               <span style={{
                 fontFamily: "'La Paloma', 'Great Vibes', cursive",
-                fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
+                fontSize: 'clamp(2rem, 6vw, 3rem)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
                 textShadow: '0 2px 25px rgba(0,0,0,0.7)',
-                display: 'inline'
+                display: 'block'
               }}>
                 Lee Ah-rom
               </span>
               <span style={{
                 fontFamily: "'La Paloma', 'Great Vibes', cursive",
-                fontSize: 'clamp(1rem, 3vw, 1.5rem)',
+                fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
                 fontWeight: 400,
                 textShadow: '0 2px 25px rgba(0,0,0,0.7)',
-                margin: '0 0.3rem',
-                display: 'inline'
+                display: 'block'
               }}>
                 &
               </span>
               <span style={{
                 fontFamily: "'La Paloma', 'Great Vibes', cursive",
-                fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
+                fontSize: 'clamp(2rem, 6vw, 3rem)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
                 textShadow: '0 2px 25px rgba(0,0,0,0.7)',
-                display: 'inline'
+                display: 'block'
               }}>
                 Shin Gyeong-ryun
               </span>
