@@ -604,11 +604,9 @@ END:VCALENDAR`;
                     }}
                   >
                     <span style={{ 
-                      fontFamily: "'Pretendard', sans-serif",
-                      fontWeight: 700, 
+                      fontFamily: "'NanumMinkyung', sans-serif",
                       color: theme.accentSolid,
-                      fontSize: '1.15em',
-                      marginRight: '-0.05em'
+                      fontSize: '1.2em'
                     }}>{line.first}</span>{line.rest}
                   </motion.p>
                 ))}
@@ -630,11 +628,9 @@ END:VCALENDAR`;
                     }}
                   >
                     <span style={{ 
-                      fontFamily: "'Pretendard', sans-serif",
-                      fontWeight: 700, 
+                      fontFamily: "'NanumMinkyung', sans-serif",
                       color: theme.accentSolid,
-                      fontSize: '1.15em',
-                      marginRight: '-0.05em'
+                      fontSize: '1.2em'
                     }}>{line.first}</span>{line.rest}
                   </motion.p>
                 ))}
