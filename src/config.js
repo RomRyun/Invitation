@@ -86,7 +86,7 @@ export const config = {
       { first: '경', rest: '건한 마음으로 소중한 분들을 초대하오니' },
       { first: '륜', rest: '슬처럼 반짝일 우리의 시작에 함께 해주십시오' },
     ],
-    poemFont: "'MapoFlowerIsland', 'Gowun Batang', serif",
+    poemFont: "'NanumMinkyung', sans-serif",
     poemSize: '0.9375rem',
     
     // D. 픽셀아트
