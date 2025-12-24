@@ -37,7 +37,7 @@ export const config = {
     nameEn1: 'Lee Ah-rom',
     nameEn2: 'Shin Gyeong-ryun',
     // 한글 초대 문구
-    inviteText: '이 아롬 신 경륜의 결혼식에 초대합니다.',
+    inviteText: '아롬 ♥ 경륜의 결혼식에 초대합니다',
     // 날짜/시간
     dateDisplay: '2026. 4. 18 (Sat) PM 1',
     // 장소
