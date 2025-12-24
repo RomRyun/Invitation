@@ -50,15 +50,15 @@ export const config = {
     
     // --- D. 한글 초대 문구 ---
     inviteText: '아롬 ♥ 경륜의 결혼식에 초대합니다',
-    inviteTextSize: 'clamp(15px, 3vw, 18px)',
+    inviteTextSize: 'clamp(18px, 3vw, 20px)',
     
     // --- E. 날짜/시간 ---
-    dateDisplay: '2026. 4. 18 (Sat) PM 1',
-    dateDisplaySize: 'clamp(21px, 4.5vw, 29px)',
+    dateDisplay: '2026. 4. 18 (토) 오후 1시',
+    dateDisplaySize: 'clamp(24px, 4.5vw, 29px)',
     
     // --- F. 장소 ---
     venueShort: '청주 에스가든 웨딩 컨벤션',
-    venueShortSize: 'clamp(15px, 3vw, 18px)',
+    venueShortSize: 'clamp(21px, 3vw, 24px)',
   },
 
   // ============================================================
