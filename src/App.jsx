@@ -237,7 +237,7 @@ END:VCALENDAR`;
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(to bottom, #E8E4DC, #E5E1D8, #E2DED4)'
+      backgroundColor: '#E5E1D8'
     }}>
       {/* 이미지 확대 모달 */}
       <AnimatePresence>
@@ -339,14 +339,14 @@ END:VCALENDAR`;
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: '#E8E4DC'
+          backgroundColor: '#E5E1D8'
         }}>
           {/* 베이지 오버레이 - 처음에만 보임 */}
           <motion.div
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundColor: '#E8E4DC',
+              backgroundColor: '#E5E1D8',
               zIndex: 3,
               opacity: blackOverlayOpacity,
               pointerEvents: 'none'
@@ -379,12 +379,6 @@ END:VCALENDAR`;
                 objectPosition: 'center center'
               }}
             />
-            {/* 이미지 위 오버레이 - 텍스트 가독성 */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.3) 100%)'
-            }} />
           </motion.div>
 
           {/* 텍스트 콘텐츠 - 항상 보임 */}
