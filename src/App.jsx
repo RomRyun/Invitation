@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { config, colorPalettes } from './config';
+import { config, theme } from './config';
 import './App.css';
-
-// 현재 테마 색상
-const theme = colorPalettes[config.colorTheme];
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });

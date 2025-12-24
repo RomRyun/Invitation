@@ -1,41 +1,34 @@
 // 청첩장 설정 파일
 // 페이지 순서대로 정리됨
 
-// ===== 컬러 테마 =====
-export const ColorTheme = {
-  PINK: 1,
-  GREEN: 2,
-};
-
-export const colorPalettes = {
-  [ColorTheme.PINK]: {
-    bgGradient: 'linear-gradient(to bottom right, #ffe4e6, #fce7f3, #e0e7ff)',
-    bgOverlay: 'linear-gradient(to bottom right, rgba(251, 113, 133, 0.2), rgba(244, 114, 182, 0.2), rgba(196, 181, 253, 0.2))',
-    accent: 'rgba(251, 113, 133, 0.8)',
-    accentSolid: '#fb7185',
-    heart: '#fda4af',
-    galleryErrorBg: 'linear-gradient(to bottom right, #ffe4e6, #fce7f3)',
-    indicatorActive: '#fb7185',
-    indicatorInactive: '#d1d5db',
-  },
-  [ColorTheme.GREEN]: {
-    bgGradient: 'linear-gradient(to bottom right, #dcfce7, #d1fae5, #e0f2fe)',
-    bgOverlay: 'linear-gradient(to bottom right, rgba(74, 222, 128, 0.2), rgba(52, 211, 153, 0.2), rgba(147, 197, 253, 0.2))',
-    accent: 'rgba(22, 163, 74, 0.85)',
-    accentSolid: '#15803d',
-    heart: '#16a34a',
-    galleryErrorBg: 'linear-gradient(to bottom right, #dcfce7, #d1fae5)',
-    indicatorActive: '#4ade80',
-    indicatorInactive: '#d1d5db',
-  },
+// ===== 베이지 테마 색상 =====
+export const theme = {
+  // 배경
+  bgColor: '#E5E1D8',
+  bgGradient: 'linear-gradient(to bottom, #E5E1D8, #F5F0E8)',
+  
+  // 강조색 (브라운/골드 계열)
+  accent: 'rgba(139, 109, 76, 0.85)',
+  accentSolid: '#8B6D4C',
+  accentLight: 'rgba(139, 109, 76, 0.15)',
+  
+  // 하트/포인트
+  heart: '#C9A87C',
+  
+  // 갤러리 에러 배경
+  galleryErrorBg: 'linear-gradient(to bottom right, #F5F0E8, #E5E1D8)',
+  
+  // 인디케이터
+  indicatorActive: '#8B6D4C',
+  indicatorInactive: '#d1d5db',
+  
+  // 텍스트
+  textDark: '#374151',
+  textMuted: '#6b7280',
+  textLight: '#9ca3af',
 };
 
 export const config = {
-  // ============================================================
-  // 테마 설정
-  // ============================================================
-  colorTheme: ColorTheme.GREEN,
-
   // ============================================================
   // 1. 첫 페이지 (Hero) - 영문 이름, 날짜, 장소
   // ============================================================
