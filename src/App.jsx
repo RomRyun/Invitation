@@ -331,18 +331,21 @@ END:VCALENDAR`;
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          backgroundColor: '#2a2a2a'
         }}
       >
         {/* 배경 이미지 */}
-        <div 
+        <img 
+          src="/hero_main.jpg"
+          alt="Wedding"
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: 'url(/hero_main.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center'
           }}
         />
         
