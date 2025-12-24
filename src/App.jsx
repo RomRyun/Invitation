@@ -435,10 +435,10 @@ END:VCALENDAR`;
             {/* 한글 초대 문구 */}
             <motion.p
               style={{
-                fontFamily: "'Pretendard', -apple-system, sans-serif",
-                fontSize: 'clamp(0.8rem, 2.5vw, 1rem)',
+                fontFamily: "'NanumMinkyung', 'Pretendard', sans-serif",
+                fontSize: 'clamp(0.9rem, 2.8vw, 1.1rem)',
                 fontWeight: 400,
-                letterSpacing: '0.1em',
+                letterSpacing: '0.08em',
                 marginBottom: '1.5rem',
                 textShadow: '0 1px 20px rgba(0,0,0,0.7)'
               }}
@@ -452,10 +452,10 @@ END:VCALENDAR`;
             {/* 날짜 */}
             <motion.div
               style={{
-                fontFamily: "'Pretendard', -apple-system, sans-serif",
-                fontSize: 'clamp(1.1rem, 3.5vw, 1.4rem)',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
+                fontFamily: "'NanumMinkyung', 'Pretendard', sans-serif",
+                fontSize: 'clamp(1.2rem, 4vw, 1.6rem)',
+                fontWeight: 400,
+                letterSpacing: '0.05em',
                 marginBottom: '0.4rem',
                 textShadow: '0 2px 20px rgba(0,0,0,0.7)'
               }}
@@ -469,10 +469,10 @@ END:VCALENDAR`;
             {/* 장소 */}
             <motion.p
               style={{
-                fontFamily: "'Pretendard', -apple-system, sans-serif",
-                fontSize: 'clamp(0.85rem, 2.5vw, 1rem)',
+                fontFamily: "'NanumMinkyung', 'Pretendard', sans-serif",
+                fontSize: 'clamp(0.9rem, 2.8vw, 1.1rem)',
                 fontWeight: 400,
-                letterSpacing: '0.05em',
+                letterSpacing: '0.03em',
                 textShadow: '0 1px 20px rgba(0,0,0,0.7)'
               }}
               initial={{ opacity: 0 }}
