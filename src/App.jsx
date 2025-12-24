@@ -604,7 +604,6 @@ END:VCALENDAR`;
                     }}
                   >
                     <span style={{ 
-                      fontFamily: "'NanumMinkyung', sans-serif",
                       color: theme.accentSolid,
                       fontSize: '1.2em'
                     }}>{line.first}</span>{line.rest}
@@ -628,7 +627,6 @@ END:VCALENDAR`;
                     }}
                   >
                     <span style={{ 
-                      fontFamily: "'NanumMinkyung', sans-serif",
                       color: theme.accentSolid,
                       fontSize: '1.2em'
                     }}>{line.first}</span>{line.rest}
