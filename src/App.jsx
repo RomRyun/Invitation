@@ -402,6 +402,7 @@ END:VCALENDAR`;
             {/* 영문 타이틀 - La Paloma (세로 배치) */}
             <motion.div
               style={{ 
+                marginTop: '-10px',
                 marginBottom: '1.5rem',
                 display: 'flex',
                 flexDirection: 'column',
