@@ -339,14 +339,14 @@ END:VCALENDAR`;
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: '#000000'
+          backgroundColor: '#E8E4DC'
         }}>
-          {/* 완전 검은색 오버레이 - 처음에만 보임 */}
+          {/* 베이지 오버레이 - 처음에만 보임 */}
           <motion.div
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundColor: '#000000',
+              backgroundColor: '#E8E4DC',
               zIndex: 3,
               opacity: blackOverlayOpacity,
               pointerEvents: 'none'
@@ -393,7 +393,7 @@ END:VCALENDAR`;
               position: 'relative',
               zIndex: 10,
               textAlign: 'center',
-              color: 'white',
+              color: '#3d3a36',
               padding: '2rem',
               y: textY
             }}
@@ -416,7 +416,7 @@ END:VCALENDAR`;
                 fontSize: 'clamp(1.4rem, 4.5vw, 2.2rem)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
-                textShadow: '0 2px 25px rgba(0,0,0,0.7)',
+                textShadow: '0 1px 8px rgba(255,255,255,0.5)',
                 display: 'block',
                 whiteSpace: 'nowrap'
               }}>
@@ -426,7 +426,7 @@ END:VCALENDAR`;
                 fontFamily: "'La Paloma', 'Great Vibes', cursive",
                 fontSize: 'clamp(0.9rem, 2.2vw, 1.3rem)',
                 fontWeight: 400,
-                textShadow: '0 2px 25px rgba(0,0,0,0.7)',
+                textShadow: '0 1px 8px rgba(255,255,255,0.5)',
                 display: 'block'
               }}>
                 &
@@ -436,7 +436,7 @@ END:VCALENDAR`;
                 fontSize: 'clamp(1.4rem, 4.5vw, 2.2rem)',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
-                textShadow: '0 2px 25px rgba(0,0,0,0.7)',
+                textShadow: '0 1px 8px rgba(255,255,255,0.5)',
                 display: 'block',
                 whiteSpace: 'nowrap'
               }}>
@@ -452,7 +452,7 @@ END:VCALENDAR`;
                 fontWeight: 400,
                 letterSpacing: '0.08em',
                 marginBottom: '1.5rem',
-                textShadow: '0 1px 20px rgba(0,0,0,0.7)'
+                textShadow: '0 1px 8px rgba(255,255,255,0.5)'
               }}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -469,7 +469,7 @@ END:VCALENDAR`;
                 fontWeight: 400,
                 letterSpacing: '0.05em',
                 marginBottom: '0.4rem',
-                textShadow: '0 2px 20px rgba(0,0,0,0.7)'
+                textShadow: '0 1px 8px rgba(255,255,255,0.5)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -485,7 +485,7 @@ END:VCALENDAR`;
                 fontSize: 'clamp(0.9rem, 2.8vw, 1.1rem)',
                 fontWeight: 400,
                 letterSpacing: '0.03em',
-                textShadow: '0 1px 20px rgba(0,0,0,0.7)'
+                textShadow: '0 1px 8px rgba(255,255,255,0.5)'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -516,7 +516,7 @@ END:VCALENDAR`;
             <span style={{
               fontFamily: "'Pretendard', sans-serif",
               fontSize: '0.6rem',
-              color: 'rgba(255,255,255,0.8)',
+              color: '#5c5955',
               letterSpacing: '0.25em',
               fontWeight: 400
             }}>
@@ -526,7 +526,7 @@ END:VCALENDAR`;
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <svg style={{ width: '1rem', height: '1rem', color: 'rgba(255,255,255,0.8)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg style={{ width: '1rem', height: '1rem', color: '#5c5955' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </motion.div>
