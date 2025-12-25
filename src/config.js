@@ -22,7 +22,7 @@ export const config = {
     // A. 영문 이름 1 (신랑)
     nameEn1: 'Lee Ah-rom',
     nameEn1Font: "'La Paloma', 'Great Vibes', cursive",
-    nameEn1Size: '32px',
+    nameEn1Size: '28px',
     
     // B. & 기호
     ampersand: '&',
@@ -32,7 +32,7 @@ export const config = {
     // C. 영문 이름 2 (신부)
     nameEn2: 'Shin Gyeong-ryun',
     nameEn2Font: "'La Paloma', 'Great Vibes', cursive",
-    nameEn2Size: '32px',
+    nameEn2Size: '28px',
     
     // D. 한글 초대 문구
     inviteText: '아롬 ♥ 경륜의 결혼식에 초대합니다',
