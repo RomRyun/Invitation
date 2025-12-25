@@ -94,6 +94,13 @@ export const config = {
   // ============================================================
   // 3. 신랑/신부 정보
   // ============================================================
+  couple: {
+    title: '신 랑  신 부',
+    titleFont: "'MapoFlowerIsland', 'Gowun Batang', serif",
+    titleSize: '1.5rem',
+    groomImage: '/groom.jpg',
+    brideImage: '/bride.jpg',
+  },
   groom: {
     name: '아롬',
     fatherName: '이원조',

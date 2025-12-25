@@ -814,43 +814,126 @@ END:VCALENDAR`;
               </motion.div>
             </div>
             
-            {/* 부모님 소개 */}
-            <motion.div 
-              style={{
-                marginTop: '2rem',
-                paddingTop: '1.5rem',
-                borderTop: '1px solid rgba(229, 231, 235, 0.6)',
-                textAlign: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.5rem',
-                color: '#4b5563',
-                fontSize: '0.875rem'
-              }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              <motion.p 
-                style={{ fontWeight: 300 }}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 신랑 신부 Section */}
+      <section id="couple" className="py-16">
+        <div className="container">
+          {/* 섹션 타이틀 */}
+          <motion.h2 
+            style={{
+              fontFamily: config.couple.titleFont,
+              fontSize: config.couple.titleSize,
+              fontWeight: 400,
+              textAlign: 'center',
+              marginBottom: '1.5rem',
+              color: theme.accentSolid,
+              letterSpacing: '0.3em'
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {config.couple.title}
+          </motion.h2>
+          
+          <motion.div
+            style={{
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              backgroundColor: 'rgba(255, 255, 255, 0.6)',
+              borderRadius: '1rem',
+              padding: '1.5rem',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.8)'
+            }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* 신랑 신부 사진 */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem',
+              marginBottom: '1.5rem'
+            }}>
+              {/* 신랑 */}
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.9 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                {config.groom.fatherName} · {config.groom.motherName}의 {config.groom.relation} <strong style={{ fontWeight: 500 }}>{config.groom.name}</strong>
-              </motion.p>
-              <motion.p 
-                style={{ fontWeight: 300 }}
+                <div style={{
+                  borderRadius: '0.5rem',
+                  overflow: 'hidden',
+                  marginBottom: '0.75rem',
+                  aspectRatio: '3/4'
+                }}>
+                  <img 
+                    src={config.couple.groomImage}
+                    alt="신랑"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+                <p style={{
+                  textAlign: 'center',
+                  fontSize: '0.8125rem',
+                  color: '#4b5563',
+                  fontWeight: 300
+                }}>
+                  {config.groom.fatherName} · {config.groom.motherName}의 {config.groom.relation} <strong style={{ fontWeight: 500 }}>{config.groom.name}</strong>
+                </p>
+              </motion.div>
+              
+              {/* 신부 */}
+              <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
               >
-                {config.bride.fatherName} · {config.bride.motherName}의 {config.bride.relation} <strong style={{ fontWeight: 500 }}>{config.bride.name}</strong>
-              </motion.p>
-            </motion.div>
+                <div style={{
+                  borderRadius: '0.5rem',
+                  overflow: 'hidden',
+                  marginBottom: '0.75rem',
+                  aspectRatio: '3/4'
+                }}>
+                  <img 
+                    src={config.couple.brideImage}
+                    alt="신부"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+                <p style={{
+                  textAlign: 'center',
+                  fontSize: '0.8125rem',
+                  color: '#4b5563',
+                  fontWeight: 300
+                }}>
+                  {config.bride.fatherName} · {config.bride.motherName}의 {config.bride.relation} <strong style={{ fontWeight: 500 }}>{config.bride.name}</strong>
+                </p>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
