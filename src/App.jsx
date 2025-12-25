@@ -516,30 +516,25 @@ END:VCALENDAR`;
               width: '100%',
               height: '100%',
               scale: imageScale,
-              // 3개의 먹물 번짐 (메인/좌상단=원형, 우하단=타원형, 느린 속도)
+              // 2개의 먹물 번짐 (메인/좌상단=원형, 느린 속도)
               WebkitMaskImage: useTransform(maskSize, (size) => {
                 const s = Math.max(0, size);
                 // 메인 (중앙, 원형, 큼)
                 const s1 = s * 0.9;
                 // 좌상단 (원형, 작음, 느림)
                 const s2 = Math.max(0, s * 0.7 - 8);
-                // 우하단 (타원형, 중간, 더 느림)
-                const s3 = Math.max(0, s * 0.6 - 12);
                 return `
                   radial-gradient(circle at 50% 45%, black ${s1 * 0.5}%, rgba(0,0,0,0.6) ${s1 * 0.7}%, rgba(0,0,0,0.2) ${s1}%, transparent ${s1 + 25}%),
-                  radial-gradient(circle at 28% 32%, black ${s2 * 0.5}%, rgba(0,0,0,0.5) ${s2 * 0.75}%, transparent ${s2 + 20}%),
-                  radial-gradient(ellipse 50% 60% at 72% 68%, black ${s3 * 0.5}%, rgba(0,0,0,0.5) ${s3 * 0.75}%, transparent ${s3 + 22}%)
+                  radial-gradient(circle at 28% 32%, black ${s2 * 0.5}%, rgba(0,0,0,0.5) ${s2 * 0.75}%, transparent ${s2 + 20}%)
                 `;
               }),
               maskImage: useTransform(maskSize, (size) => {
                 const s = Math.max(0, size);
                 const s1 = s * 0.9;
                 const s2 = Math.max(0, s * 0.7 - 8);
-                const s3 = Math.max(0, s * 0.6 - 12);
                 return `
                   radial-gradient(circle at 50% 45%, black ${s1 * 0.5}%, rgba(0,0,0,0.6) ${s1 * 0.7}%, rgba(0,0,0,0.2) ${s1}%, transparent ${s1 + 25}%),
-                  radial-gradient(circle at 28% 32%, black ${s2 * 0.5}%, rgba(0,0,0,0.5) ${s2 * 0.75}%, transparent ${s2 + 20}%),
-                  radial-gradient(ellipse 50% 60% at 72% 68%, black ${s3 * 0.5}%, rgba(0,0,0,0.5) ${s3 * 0.75}%, transparent ${s3 + 22}%)
+                  radial-gradient(circle at 28% 32%, black ${s2 * 0.5}%, rgba(0,0,0,0.5) ${s2 * 0.75}%, transparent ${s2 + 20}%)
                 `;
               })
             }}
