@@ -97,7 +97,7 @@ function App() {
     document.body.style.overflow = 'hidden';
     
     const heroEnd = window.innerHeight;
-    const duration = 2500; // 2.5초
+    const duration = 4000; // 4초
     let startTime = null;
     
     const animate = (currentTime) => {
