@@ -14,7 +14,7 @@ export const theme = {
 
 export const config = {
   // ============================================================
-  // 1. Hero (표지) - ⚠️ px 단위: 디바이스 폰트 설정 무시
+  // 1. Hero (표지) - ⚠️ 고정 px 단위: 디바이스 폰트 설정 무시
   // ============================================================
   hero: {
     backgroundImage: '/hero_main.jpg',
@@ -22,34 +22,34 @@ export const config = {
     // A. 영문 이름 1 (신랑)
     nameEn1: 'Lee Ah-rom',
     nameEn1Font: "'La Paloma', 'Great Vibes', cursive",
-    nameEn1Size: 'clamp(24px, 5vw, 38px)',
+    nameEn1Size: '32px',
     
     // B. & 기호
     ampersand: '&',
     ampersandFont: "'La Paloma', 'Great Vibes', cursive",
-    ampersandSize: 'clamp(16px, 2.5vw, 22px)',
+    ampersandSize: '18px',
     
     // C. 영문 이름 2 (신부)
     nameEn2: 'Shin Gyeong-ryun',
     nameEn2Font: "'La Paloma', 'Great Vibes', cursive",
-    nameEn2Size: 'clamp(24px, 5vw, 38px)',
+    nameEn2Size: '32px',
     
     // D. 한글 초대 문구
     inviteText: '아롬 ♥ 경륜의 결혼식에 초대합니다',
     inviteTextFont: "'KoPubWorldDotum', sans-serif",
-    inviteTextSize: 'clamp(18px, 3vw, 20px)',
+    inviteTextSize: '18px',
     inviteTextWeight: 300,
     
     // E. 날짜
     dateDisplay: '2026. 4. 18 (토) 오후 1시',
     dateDisplayFont: "'KoPubWorldDotum', sans-serif",
-    dateDisplaySize: 'clamp(24px, 4.5vw, 29px)',
+    dateDisplaySize: '26px',
     dateDisplayWeight: 300,
     
     // F. 장소
     venueShort: '청주 에스가든 웨딩 컨벤션',
     venueShortFont: "'KoPubWorldDotum', sans-serif",
-    venueShortSize: 'clamp(21px, 3vw, 24px)',
+    venueShortSize: '22px',
     venueShortWeight: 300,
     
     // G. 스크롤 안내

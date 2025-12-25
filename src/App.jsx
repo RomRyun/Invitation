@@ -102,7 +102,11 @@ function App() {
   // 갤러리 이미지 배열
   const galleryImages = config.gallery.images.filter(Boolean);
 
-  // 갤러리 스와이프 핸들러 (터치)
+  // 스와이프 threshold (데드존)
+  const SWIPE_THRESHOLD = 60;
+  const TAP_DURATION = 250;
+
+  // 갤러리 스와이프 핸들러 (터치) - 일반 모드
   const handleTouchStart = (e) => {
     setStartX(e.touches[0].clientX);
     setStartY(e.touches[0].clientY);
@@ -118,28 +122,32 @@ function App() {
     const diffX = startX - currentX;
     const diffY = startY - currentY;
 
-    // 수평 이동이 수직 이동보다 크면 스와이프로 판단
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+    // 수평 이동이 수직 이동보다 1.5배 이상 크면 스와이프로 판단
+    if (Math.abs(diffX) > Math.abs(diffY) * 1.5 && Math.abs(diffX) > 20) {
       touchMoved.current = true;
-      if (Math.abs(diffX) > 50) {
-        if (diffX > 0 && currentImageIndex < galleryImages.length - 1) {
-          setCurrentImageIndex(currentImageIndex + 1);
-          setIsDragging(false);
-        } else if (diffX < 0 && currentImageIndex > 0) {
-          setCurrentImageIndex(currentImageIndex - 1);
-          setIsDragging(false);
-        }
-      }
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
+    if (!isDragging) return;
+    
     const touchDuration = Date.now() - touchStartTime.current;
-    // 짧은 터치 + 이동 없음 = 탭 (이미지 확대)
-    if (touchDuration < 200 && !touchMoved.current) {
+    const endX = e.changedTouches[0].clientX;
+    const diffX = startX - endX;
+    
+    // 스와이프 판정: threshold 이상 이동했을 때만
+    if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+      if (diffX > 0 && currentImageIndex < galleryImages.length - 1) {
+        setCurrentImageIndex(prev => prev + 1);
+      } else if (diffX < 0 && currentImageIndex > 0) {
+        setCurrentImageIndex(prev => prev - 1);
+      }
+    } else if (touchDuration < TAP_DURATION && !touchMoved.current) {
+      // 짧은 터치 + 이동 없음 = 탭 (이미지 확대)
       setModalImageIndex(currentImageIndex);
       setShowModal(true);
     }
+    
     setIsDragging(false);
   };
 
@@ -152,39 +160,90 @@ function App() {
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const currentX = e.clientX;
-    const diffX = startX - currentX;
-
-    if (Math.abs(diffX) > 30) {
+    const diffX = startX - e.clientX;
+    if (Math.abs(diffX) > 20) {
       touchMoved.current = true;
-    }
-
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0 && currentImageIndex < galleryImages.length - 1) {
-        setCurrentImageIndex(currentImageIndex + 1);
-        setIsDragging(false);
-      } else if (diffX < 0 && currentImageIndex > 0) {
-        setCurrentImageIndex(currentImageIndex - 1);
-        setIsDragging(false);
-      }
     }
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e) => {
+    if (!isDragging) return;
+    
+    const diffX = startX - e.clientX;
+    
+    if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+      if (diffX > 0 && currentImageIndex < galleryImages.length - 1) {
+        setCurrentImageIndex(prev => prev + 1);
+      } else if (diffX < 0 && currentImageIndex > 0) {
+        setCurrentImageIndex(prev => prev - 1);
+      }
+    }
+    
     setIsDragging(false);
   };
 
   // 이미지 클릭 (PC용 확대)
-  const handleImageClick = (e) => {
+  const handleImageClick = () => {
     if (!touchMoved.current) {
       setModalImageIndex(currentImageIndex);
       setShowModal(true);
     }
   };
 
+  // 모달 스와이프 핸들러
+  const [modalStartX, setModalStartX] = useState(0);
+  const [modalIsDragging, setModalIsDragging] = useState(false);
+
+  const handleModalTouchStart = (e) => {
+    setModalStartX(e.touches[0].clientX);
+    setModalIsDragging(true);
+  };
+
+  const handleModalTouchEnd = (e) => {
+    if (!modalIsDragging) return;
+    
+    const endX = e.changedTouches[0].clientX;
+    const diffX = modalStartX - endX;
+    
+    if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+      if (diffX > 0 && modalImageIndex < galleryImages.length - 1) {
+        setModalImageIndex(prev => prev + 1);
+      } else if (diffX < 0 && modalImageIndex > 0) {
+        setModalImageIndex(prev => prev - 1);
+      }
+    }
+    
+    setModalIsDragging(false);
+  };
+
   // 모달 닫기
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  // 이전/다음 이미지 함수
+  const goToPrevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(prev => prev - 1);
+    }
+  };
+
+  const goToNextImage = () => {
+    if (currentImageIndex < galleryImages.length - 1) {
+      setCurrentImageIndex(prev => prev + 1);
+    }
+  };
+
+  const goToPrevModalImage = () => {
+    if (modalImageIndex > 0) {
+      setModalImageIndex(prev => prev - 1);
+    }
+  };
+
+  const goToNextModalImage = () => {
+    if (modalImageIndex < galleryImages.length - 1) {
+      setModalImageIndex(prev => prev + 1);
+    }
   };
 
   // ICS 파일 다운로드 함수
@@ -235,6 +294,8 @@ END:VCALENDAR`;
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
+            onTouchStart={handleModalTouchStart}
+            onTouchEnd={handleModalTouchEnd}
             style={{
               position: 'fixed',
               inset: 0,
@@ -244,25 +305,92 @@ END:VCALENDAR`;
               alignItems: 'center',
               justifyContent: 'center',
               padding: '1rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              touchAction: 'pan-y'
             }}
           >
-            <motion.img
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25 }}
-              src={galleryImages[modalImageIndex]}
-              alt="확대 이미지"
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                maxWidth: '100%',
-                maxHeight: '90vh',
-                objectFit: 'contain',
-                borderRadius: '0.5rem',
-                cursor: 'default'
-              }}
-            />
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={modalImageIndex}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.2 }}
+                src={galleryImages[modalImageIndex]}
+                alt="확대 이미지"
+                onClick={(e) => e.stopPropagation()}
+                draggable={false}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '85vh',
+                  objectFit: 'contain',
+                  borderRadius: '0.5rem',
+                  cursor: 'default',
+                  userSelect: 'none'
+                }}
+              />
+            </AnimatePresence>
+            
+            {/* 모달 좌우 화살표 */}
+            {modalImageIndex > 0 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPrevModalImage();
+                }}
+                style={{
+                  position: 'absolute',
+                  left: '0.5rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '3rem',
+                  height: '3rem',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.5rem',
+                  fontWeight: 300,
+                  zIndex: 101
+                }}
+              >
+                ‹
+              </button>
+            )}
+            {modalImageIndex < galleryImages.length - 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNextModalImage();
+                }}
+                style={{
+                  position: 'absolute',
+                  right: '0.5rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '3rem',
+                  height: '3rem',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.5rem',
+                  fontWeight: 300,
+                  zIndex: 101
+                }}
+              >
+                ›
+              </button>
+            )}
+            
             {/* 닫기 버튼 */}
             <button
               onClick={closeModal}
@@ -280,7 +408,8 @@ END:VCALENDAR`;
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                zIndex: 102
               }}
             >
               ×
@@ -295,14 +424,20 @@ END:VCALENDAR`;
               gap: '0.5rem'
             }}>
               {galleryImages.map((_, index) => (
-                <div
+                <button
                   key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setModalImageIndex(index);
+                  }}
                   style={{
                     width: index === modalImageIndex ? '1.5rem' : '0.5rem',
                     height: '0.5rem',
                     borderRadius: '9999px',
+                    border: 'none',
                     backgroundColor: index === modalImageIndex ? 'white' : 'rgba(255, 255, 255, 0.4)',
-                    transition: 'all 300ms'
+                    transition: 'all 300ms',
+                    cursor: 'pointer'
                   }}
                 />
               ))}
@@ -820,9 +955,15 @@ END:VCALENDAR`;
               {/* 좌우 화살표 */}
               {currentImageIndex > 0 && (
                 <button
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onTouchEnd={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    goToPrevImage();
+                  }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setCurrentImageIndex(prev => prev - 1);
+                    goToPrevImage();
                   }}
                   style={{
                     position: 'absolute',
@@ -841,7 +982,8 @@ END:VCALENDAR`;
                     boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                     color: '#374151',
                     fontSize: '1.25rem',
-                    fontWeight: 300
+                    fontWeight: 300,
+                    zIndex: 10
                   }}
                 >
                   ‹
@@ -849,9 +991,15 @@ END:VCALENDAR`;
               )}
               {currentImageIndex < galleryImages.length - 1 && (
                 <button
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onTouchEnd={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    goToNextImage();
+                  }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setCurrentImageIndex(prev => prev + 1);
+                    goToNextImage();
                   }}
                   style={{
                     position: 'absolute',
@@ -870,7 +1018,8 @@ END:VCALENDAR`;
                     boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                     color: '#374151',
                     fontSize: '1.25rem',
-                    fontWeight: 300
+                    fontWeight: 300,
+                    zIndex: 10
                   }}
                 >
                   ›

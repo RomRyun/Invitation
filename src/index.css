@@ -228,6 +228,10 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* 시스템 폰트 크기 설정 반영을 위해 상대 단위 사용 */
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* 스크롤바 스타일링 */
