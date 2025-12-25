@@ -516,7 +516,7 @@ END:VCALENDAR`;
               width: '100%',
               height: '100%',
               scale: imageScale,
-              // 4개의 먹물 번짐 (중앙/좌상단/우상단/좌하단, 모두 원형)
+              // 3개의 먹물 번짐 (중앙/좌상단/우상단, 모두 원형, 하단은 얼굴이라 제외)
               WebkitMaskImage: useTransform(maskSize, (size) => {
                 const s = Math.max(0, size);
                 // 메인 (중앙, 가장 큼, 빠름)
@@ -525,13 +525,10 @@ END:VCALENDAR`;
                 const s2 = Math.max(0, s * 0.7 - 8);
                 // 우상단 (중간, 중간 속도)
                 const s3 = Math.max(0, s * 0.75 - 5);
-                // 좌하단 (작음, 가장 느림)
-                const s4 = Math.max(0, s * 0.65 - 12);
                 return `
                   radial-gradient(circle at 50% 45%, black ${s1 * 0.5}%, rgba(0,0,0,0.6) ${s1 * 0.7}%, rgba(0,0,0,0.2) ${s1}%, transparent ${s1 + 25}%),
                   radial-gradient(circle at 25% 28%, black ${s2 * 0.5}%, rgba(0,0,0,0.5) ${s2 * 0.75}%, transparent ${s2 + 20}%),
-                  radial-gradient(circle at 78% 25%, black ${s3 * 0.5}%, rgba(0,0,0,0.5) ${s3 * 0.75}%, transparent ${s3 + 18}%),
-                  radial-gradient(circle at 22% 75%, black ${s4 * 0.5}%, rgba(0,0,0,0.5) ${s4 * 0.75}%, transparent ${s4 + 18}%)
+                  radial-gradient(circle at 78% 25%, black ${s3 * 0.5}%, rgba(0,0,0,0.5) ${s3 * 0.75}%, transparent ${s3 + 18}%)
                 `;
               }),
               maskImage: useTransform(maskSize, (size) => {
@@ -539,12 +536,10 @@ END:VCALENDAR`;
                 const s1 = s * 0.95;
                 const s2 = Math.max(0, s * 0.7 - 8);
                 const s3 = Math.max(0, s * 0.75 - 5);
-                const s4 = Math.max(0, s * 0.65 - 12);
                 return `
                   radial-gradient(circle at 50% 45%, black ${s1 * 0.5}%, rgba(0,0,0,0.6) ${s1 * 0.7}%, rgba(0,0,0,0.2) ${s1}%, transparent ${s1 + 25}%),
                   radial-gradient(circle at 25% 28%, black ${s2 * 0.5}%, rgba(0,0,0,0.5) ${s2 * 0.75}%, transparent ${s2 + 20}%),
-                  radial-gradient(circle at 78% 25%, black ${s3 * 0.5}%, rgba(0,0,0,0.5) ${s3 * 0.75}%, transparent ${s3 + 18}%),
-                  radial-gradient(circle at 22% 75%, black ${s4 * 0.5}%, rgba(0,0,0,0.5) ${s4 * 0.75}%, transparent ${s4 + 18}%)
+                  radial-gradient(circle at 78% 25%, black ${s3 * 0.5}%, rgba(0,0,0,0.5) ${s3 * 0.75}%, transparent ${s3 + 18}%)
                 `;
               })
             }}
