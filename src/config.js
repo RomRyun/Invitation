@@ -69,14 +69,15 @@ export const config = {
     // 첫 글자가 Bold 처리됨
     poem: [
       // 이아로(롬)
-      { first: '이', rest: '토록 고요한 밤하늘 아래' },
-      { first: '아', rest: '스라이 홀로 빛나던 별들이 만나' },
-      { first: '로마', rest: ' 신화 속 별자리처럼 함께 하고자 합니다' },
+      { first: '이', rest: '렇게 우리 두 사람이' },
+      { first: '아', rest: '름다운 만남을 시작했습니다' },
+      { first: '롬', rest: '륜 커플이' },
       // 신경륜
-      { first: '신', rest: '비롭고 설레이는 이 첫걸음의 자리에' },
-      { first: '경', rest: '건한 마음으로 소중한 분들을 초대하오니' },
-      { first: '륜', rest: '슬처럼 반짝일 우리의 시작에 함께 해주십시오' },
+      { first: '신', rest: '혼을 시작하려고 합니다' },
+      { first: '경', rest: '사로운 날을 축하해주시고' },
+      { first: '륜', rest: '택한 삶을 만들어가겠습니다' },
     ],
+    
     poemFont: "'NanumYeDang', sans-serif",
     poemSize: '1.05rem',
   },
@@ -109,6 +110,12 @@ export const config = {
       '/gallery_2.jpg',
       '/gallery_3.jpg',
       '/gallery_4.jpg',
+      '/gallery_5.jpg',
+      '/gallery_6.jpg',
+      '/gallery_7.jpg',
+      '/gallery_8.jpg',
+      '/gallery_9.jpg',
+      '/gallery_10.jpg',
     ],
     touchHint: '터치하여 확대',
   },
