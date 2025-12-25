@@ -131,7 +131,6 @@ function App() {
   const handleTouchEnd = (e) => {
     if (!isDragging) return;
     
-    const touchDuration = Date.now() - touchStartTime.current;
     const endX = e.changedTouches[0].clientX;
     const diffX = startX - endX;
     
@@ -142,10 +141,6 @@ function App() {
       } else if (diffX < 0 && currentImageIndex > 0) {
         setCurrentImageIndex(prev => prev - 1);
       }
-    } else if (touchDuration < TAP_DURATION && !touchMoved.current) {
-      // 짧은 터치 + 이동 없음 = 탭 (이미지 확대)
-      setModalImageIndex(currentImageIndex);
-      setShowModal(true);
     }
     
     setIsDragging(false);
@@ -182,12 +177,10 @@ function App() {
     setIsDragging(false);
   };
 
-  // 이미지 클릭 (PC용 확대)
-  const handleImageClick = () => {
-    if (!touchMoved.current) {
-      setModalImageIndex(currentImageIndex);
-      setShowModal(true);
-    }
+  // 확대 버튼 클릭
+  const openZoomModal = () => {
+    setModalImageIndex(currentImageIndex);
+    setShowModal(true);
   };
 
   // 모달 스와이프 핸들러
@@ -823,7 +816,7 @@ END:VCALENDAR`;
                 position: 'relative',
                 overflow: 'hidden',
                 borderRadius: '0.75rem',
-                cursor: 'pointer'
+                cursor: 'grab'
               }}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
@@ -832,7 +825,6 @@ END:VCALENDAR`;
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
-              onClick={handleImageClick}
             >
               {/* 고정 비율 컨테이너 (4:5 세로 비율) */}
               <div style={{
@@ -906,21 +898,42 @@ END:VCALENDAR`;
                 </div>
               </div>
               
-              {/* 터치 힌트 */}
-              <div style={{
-                position: 'absolute',
-                bottom: '0.75rem',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                color: 'white',
-                fontSize: '0.625rem',
-                padding: '0.25rem 0.75rem',
-                borderRadius: '9999px',
-                pointerEvents: 'none'
-              }}>
-                {config.gallery.touchHint}
-              </div>
+              {/* 확대 버튼 - 오른쪽 아래 */}
+              <button
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  openZoomModal();
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openZoomModal();
+                }}
+                style={{
+                  position: 'absolute',
+                  bottom: '0.75rem',
+                  right: '0.75rem',
+                  width: '2.5rem',
+                  height: '2.5rem',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  zIndex: 10
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  <line x1="11" y1="8" x2="11" y2="14"/>
+                  <line x1="8" y1="11" x2="14" y2="11"/>
+                </svg>
+              </button>
 
               {/* 좌우 화살표 */}
               {currentImageIndex > 0 && (
