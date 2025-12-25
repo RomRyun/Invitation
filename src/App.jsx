@@ -284,7 +284,10 @@ END:VCALENDAR`;
   return (
     <div style={{ 
       minHeight: '100vh', 
-      backgroundColor: theme.bgColor
+      maxWidth: '500px',
+      margin: '0 auto',
+      backgroundColor: theme.bgColor,
+      boxShadow: '0 0 30px rgba(0,0,0,0.1)'
     }}>
       {/* 이미지 확대 모달 */}
       <AnimatePresence>

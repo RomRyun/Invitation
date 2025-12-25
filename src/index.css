@@ -224,6 +224,7 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
   font-family: 'KyoboHandwriting2021sjy', 'Gowun Dodum', 'Pretendard', sans-serif;
+  background-color: #d4d0c7;
 }
 
 html {
