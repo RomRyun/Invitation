@@ -774,7 +774,8 @@ END:VCALENDAR`;
                     objectFit: 'cover',
                     objectPosition: 'center 15%',
                     position: 'absolute',
-                    top: '-12.5%'
+                    top: '-12.5%',
+                    transform: 'scale(1.1)'
                   }}
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -817,9 +818,10 @@ END:VCALENDAR`;
                     width: '100%',
                     height: '125%',
                     objectFit: 'cover',
-                    objectPosition: 'center 35%',
+                    objectPosition: 'center 40%',
                     position: 'absolute',
-                    top: '-12.5%'
+                    top: '-12.5%',
+                    transform: 'scale(1.1)'
                   }}
                   onError={(e) => {
                     e.target.style.display = 'none';
