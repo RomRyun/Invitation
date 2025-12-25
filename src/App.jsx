@@ -91,6 +91,7 @@ function App() {
 
   // Hero 페이지 자동 스크롤
   const [heroCompleted, setHeroCompleted] = useState(false);
+  const isAnimatingRef = useRef(false);
   const animationIdRef = useRef(null);
   
   useEffect(() => {
@@ -98,14 +99,12 @@ function App() {
     
     const heroEnd = () => window.innerHeight;
     
-    // 커스텀 스무스 스크롤 (800ms, 등속)
+    // 커스텀 스무스 스크롤 (2초, 등속)
     const smoothScrollTo = (targetY) => {
-      // 이미 진행 중이면 취소
-      if (animationIdRef.current) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
+      if (isAnimatingRef.current) return;
+      isAnimatingRef.current = true;
       
-      const duration = 800; // 0.8초
+      const duration = 2000; // 2초
       const startY = window.scrollY;
       const distance = targetY - startY;
       const startTime = performance.now();
@@ -120,6 +119,7 @@ function App() {
           animationIdRef.current = requestAnimationFrame(animate);
         } else {
           animationIdRef.current = null;
+          isAnimatingRef.current = false;
           setHeroCompleted(true);
         }
       };
@@ -131,13 +131,16 @@ function App() {
       const scrollY = window.scrollY;
       const end = heroEnd();
       
-      // Hero 페이지 내에 있고, 초기 상태(0)도 끝 상태도 아닌 경우
-      if (!heroCompleted && scrollY > 10 && scrollY < end - 10) {
+      // Hero 페이지 내에 있고, 중간 상태인 경우 자동 스크롤
+      if (!heroCompleted && !isAnimatingRef.current && scrollY > 10 && scrollY < end - 10) {
         smoothScrollTo(end);
       }
     };
     
     const onScroll = () => {
+      // 애니메이션 중에는 아무것도 안 함
+      if (isAnimatingRef.current) return;
+      
       const scrollY = window.scrollY;
       const end = heroEnd();
       
@@ -146,7 +149,7 @@ function App() {
         setHeroCompleted(false);
       }
       
-      // Hero 끝에 도달하면 완료 표시
+      // Hero 끝에 도달하면 완료 표시 (수동 스크롤로 도달한 경우만)
       if (scrollY >= end - 5) {
         setHeroCompleted(true);
       }
