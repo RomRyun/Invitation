@@ -27,6 +27,33 @@
   font-display: swap;
 }
 
+/* KoPubWorld Dotum - Light */
+@font-face {
+  font-family: 'KoPubWorldDotum';
+  src: url('/fonts/KoPubWorld Dotum Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* KoPubWorld Dotum - Medium */
+@font-face {
+  font-family: 'KoPubWorldDotum';
+  src: url('/fonts/KoPubWorld Dotum Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* KoPubWorld Dotum - Bold */
+@font-face {
+  font-family: 'KoPubWorldDotum';
+  src: url('/fonts/KoPubWorld Dotum Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* 학교안심 퍼즐 블랙 - 타이틀용 캘리그라피 */
 @font-face {
   font-family: 'HakgyoansimPuzzle';
