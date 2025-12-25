@@ -759,93 +759,6 @@ END:VCALENDAR`;
               WebkitBackdropFilter: 'blur(24px)',
               backgroundColor: 'rgba(255, 255, 255, 0.6)',
               borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.8)'
-            }}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            {/* 인사말 메시지 */}
-            <div style={{ 
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.5rem',
-              textAlign: 'center'
-            }}>
-              {/* 메인 메시지 */}
-              <motion.div 
-                style={{ 
-                  fontFamily: config.greeting.messageFont,
-                  fontSize: config.greeting.messageSize,
-                  color: config.greeting.messageColor,
-                  lineHeight: 1.8,
-                  fontWeight: 300
-                }}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                {config.greeting.message.map((line, i) => (
-                  <p key={i} style={{ marginBottom: '0.25rem' }}>{line}</p>
-                ))}
-              </motion.div>
-              
-              {/* 서브 메시지 */}
-              <motion.div 
-                style={{ 
-                  fontFamily: config.greeting.messageFont,
-                  fontSize: config.greeting.messageSize,
-                  color: config.greeting.messageColor,
-                  lineHeight: 1.8,
-                  fontWeight: 300
-                }}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                {config.greeting.subMessage.map((line, i) => (
-                  <p key={i} style={{ marginBottom: '0.25rem' }}>{line}</p>
-                ))}
-              </motion.div>
-            </div>
-            
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 신랑 신부 Section */}
-      <section id="couple" className="py-16">
-        <div className="container">
-          {/* 섹션 타이틀 */}
-          <motion.h2 
-            style={{
-              fontFamily: config.couple.titleFont,
-              fontSize: config.couple.titleSize,
-              fontWeight: 400,
-              textAlign: 'center',
-              marginBottom: '1.5rem',
-              color: theme.accentSolid,
-              letterSpacing: '0.3em'
-            }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            {config.couple.title}
-          </motion.h2>
-          
-          <motion.div
-            style={{
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.6)',
-              borderRadius: '1rem',
               padding: '1.5rem',
               boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
               border: '1px solid rgba(255, 255, 255, 0.8)'
@@ -934,6 +847,55 @@ END:VCALENDAR`;
                 </p>
               </motion.div>
             </div>
+            
+            {/* 인사말 메시지 */}
+            <div style={{ 
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              textAlign: 'center',
+              paddingTop: '1rem',
+              borderTop: '1px solid rgba(229, 231, 235, 0.6)'
+            }}>
+              {/* 메인 메시지 */}
+              <motion.div 
+                style={{ 
+                  fontFamily: config.greeting.messageFont,
+                  fontSize: config.greeting.messageSize,
+                  color: config.greeting.messageColor,
+                  lineHeight: 1.8,
+                  fontWeight: 300
+                }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                {config.greeting.message.map((line, i) => (
+                  <p key={i} style={{ marginBottom: '0.25rem' }}>{line}</p>
+                ))}
+              </motion.div>
+              
+              {/* 서브 메시지 */}
+              <motion.div 
+                style={{ 
+                  fontFamily: config.greeting.messageFont,
+                  fontSize: config.greeting.messageSize,
+                  color: config.greeting.messageColor,
+                  lineHeight: 1.8,
+                  fontWeight: 300
+                }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                {config.greeting.subMessage.map((line, i) => (
+                  <p key={i} style={{ marginBottom: '0.25rem' }}>{line}</p>
+                ))}
+              </motion.div>
+            </div>
+            
           </motion.div>
         </div>
       </section>
