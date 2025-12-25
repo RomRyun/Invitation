@@ -803,7 +803,7 @@ END:VCALENDAR`;
               transition={{ duration: 0.5, delay: 0.3 }}
               style={{ marginBottom: '2rem' }}
             >
-              {/* 신부 사진 - 상하 10% 프레임 */}
+              {/* 신부 사진 - 상하 10% 프레임, 위로 올림 */}
               <div style={{
                 overflow: 'hidden',
                 marginBottom: '1rem',
@@ -817,7 +817,7 @@ END:VCALENDAR`;
                     width: '100%',
                     height: '125%',
                     objectFit: 'cover',
-                    objectPosition: 'center 15%',
+                    objectPosition: 'center 5%',
                     position: 'absolute',
                     top: '-12.5%'
                   }}
