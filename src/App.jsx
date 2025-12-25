@@ -664,7 +664,7 @@ END:VCALENDAR`;
                 fontSize: config.hero.dateDisplaySize,
                 fontWeight: config.hero.dateDisplayWeight,
                 letterSpacing: '0.05em',
-                marginBottom: '0.4rem',
+                marginBottom: '0.15rem',
                 textShadow: '0 2px 15px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.4)'
               }}
               initial={{ opacity: 0 }}
@@ -734,6 +734,25 @@ END:VCALENDAR`;
       {/* 인사말 + 픽셀아트 통합 Section */}
       <section id="greeting" className="py-16">
         <div className="container">
+          {/* 섹션 타이틀 */}
+          <motion.h2 
+            style={{ 
+              textAlign: 'center', 
+              fontFamily: config.greeting.titleFont,
+              fontSize: config.greeting.titleSize,
+              fontWeight: 400,
+              color: theme.accentSolid,
+              marginBottom: '1.5rem',
+              letterSpacing: '0.3em'
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {config.greeting.title}
+          </motion.h2>
+          
           <motion.div
             style={{
               backdropFilter: 'blur(24px)',

@@ -223,7 +223,8 @@ body {
   min-width: 320px;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  font-family: 'KyoboHandwriting2021sjy', 'Gowun Dodum', 'Pretendard', sans-serif;
+  font-family: 'KoPubWorldDotum', 'Pretendard', sans-serif;
+  font-weight: 300;
   background-color: #d4d0c7;
 }
 

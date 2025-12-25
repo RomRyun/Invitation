@@ -60,22 +60,10 @@ export const config = {
   // 2. 인사말 섹션
   // ============================================================
   greeting: {
-    // A. 타이틀 (주석 처리)
-    // title: '"서로를 비추는 별이 되려 합니다"',
-    // titleFont: "'MapoFlowerIsland', 'Gowun Batang', serif",
-    // titleSize: '1.5rem',
-    
-    // B. 메인 메시지 (주석 처리)
-    // message: [
-    //   '각자의 밤 하늘을 수놓던 별빛들이 만나',
-    //   '서로를 비추는 아름다운 은하수가 되고자 합니다.',
-    // ],
-    
-    // C. 서브 메시지 (주석 처리)
-    // subMessage: [
-    //   '이 설레이는 소중한 시작의 자리에',
-    //   '귀한 걸음 하시어 저희와 함께 해주세요.',
-    // ],
+    // A. 타이틀
+    title: '초 대',
+    titleFont: "'MapoFlowerIsland', 'Gowun Batang', serif",
+    titleSize: '1.5rem',
     
     // ★ 육행시 (이아롬 + 신경륜)
     // 첫 글자가 Bold 처리됨
@@ -91,9 +79,6 @@ export const config = {
     ],
     poemFont: "'NanumYeDang', sans-serif",
     poemSize: '1.05rem',
-    
-    // D. 픽셀아트
-    pixelArt: '/pixel_art.gif',
   },
 
   // ============================================================
