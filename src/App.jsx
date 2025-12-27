@@ -5,6 +5,7 @@ import './App.css';
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [ddayInfo, setDdayInfo] = useState({ status: 'before', dayDiff: 0 });
   const [copied, setCopied] = useState({ 
     groom: false, bride: false, 
     groomFather: false, groomMother: false,
@@ -65,11 +66,20 @@ function App() {
 
   // D-Day 카운터
   useEffect(() => {
-    const targetDate = new Date(`${config.wedding.date}T${config.wedding.time}:00`).getTime();
+    const targetStart = new Date(`${config.wedding.date}T${config.wedding.time}:00`);
+    const targetStartMs = targetStart.getTime();
+    const targetMidnight = new Date(`${config.wedding.date}T00:00:00`);
     
     const updateTimer = () => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
+      const now = new Date();
+      const nowMs = now.getTime();
+      const difference = targetStartMs - nowMs;
+
+      // D-day (날짜 기준)
+      const nowMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const dayDiff = Math.round((targetMidnight.getTime() - nowMidnight.getTime()) / (1000 * 60 * 60 * 24));
+      const status = dayDiff > 0 ? 'before' : (dayDiff === 0 ? 'day' : 'after');
+      setDdayInfo({ status, dayDiff });
 
       if (difference > 0) {
         setTimeLeft({
@@ -88,6 +98,11 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const ddayBadgeText = ddayInfo.status === 'before'
+    ? `D-${ddayInfo.dayDiff}`
+    : (ddayInfo.status === 'day' ? 'D-DAY' : `D+${Math.abs(ddayInfo.dayDiff)}`);
 
   // Hero 자동 스크롤 (페이지 로드 시 2.5초에 걸쳐 자동 스크롤)
   const [introComplete, setIntroComplete] = useState(false);
@@ -709,6 +724,94 @@ END:VCALENDAR`;
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* D-Day Section */}
+      <section id="dday" className="py-16">
+        <div className="container">
+          <motion.h2
+            style={{
+              textAlign: 'center',
+              fontFamily: config.dday.titleFont,
+              fontSize: config.dday.titleSize,
+              fontWeight: 400,
+              color: theme.accentSolid,
+              marginBottom: '1.5rem',
+              letterSpacing: '0.3em'
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {config.dday.title}
+          </motion.h2>
+
+          <motion.div
+            style={{
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              backgroundColor: 'rgba(255, 255, 255, 0.6)',
+              borderRadius: '1rem',
+              padding: '1.5rem',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.8)',
+              textAlign: 'center'
+            }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            aria-live="polite"
+          >
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem' }}>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0.375rem 0.75rem',
+                borderRadius: '9999px',
+                backgroundColor: 'rgba(139, 109, 76, 0.12)',
+                border: '1px solid rgba(139, 109, 76, 0.25)',
+                color: theme.accentSolid,
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                letterSpacing: '0.06em'
+              }}>
+                {ddayBadgeText}
+              </span>
+            </div>
+
+            <p style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: 300, marginBottom: '1rem' }}>
+              {ddayInfo.status === 'before' ? config.dday.beforeLabel : (ddayInfo.status === 'day' ? config.dday.dayLabel : config.dday.afterLabel)}
+            </p>
+
+            {(timeLeft.days + timeLeft.hours + timeLeft.minutes + timeLeft.seconds) > 0 ? (
+              <div className="ddayGrid" role="group" aria-label="결혼식 카운트다운">
+                <div className="ddayUnit">
+                  <div className="ddayNum" style={{ fontSize: '1.375rem', fontWeight: 700, color: '#1f2937' }}>{timeLeft.days}</div>
+                  <div className="ddayLabel">일</div>
+                </div>
+                <div className="ddayUnit">
+                  <div className="ddayNum" style={{ fontSize: '1.375rem', fontWeight: 700, color: '#1f2937' }}>{pad2(timeLeft.hours)}</div>
+                  <div className="ddayLabel">시간</div>
+                </div>
+                <div className="ddayUnit">
+                  <div className="ddayNum" style={{ fontSize: '1.375rem', fontWeight: 700, color: '#1f2937' }}>{pad2(timeLeft.minutes)}</div>
+                  <div className="ddayLabel">분</div>
+                </div>
+                <div className="ddayUnit">
+                  <div className="ddayNum" style={{ fontSize: '1.375rem', fontWeight: 700, color: '#1f2937' }}>{pad2(timeLeft.seconds)}</div>
+                  <div className="ddayLabel">초</div>
+                </div>
+              </div>
+            ) : (
+              <p style={{ fontSize: '0.9375rem', color: '#374151', fontWeight: 300, lineHeight: 1.7 }}>
+                {ddayInfo.status === 'day' ? config.dday.messageDay : config.dday.messageAfter}
+              </p>
+            )}
           </motion.div>
         </div>
       </section>
