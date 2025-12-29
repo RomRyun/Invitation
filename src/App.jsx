@@ -3,6 +3,22 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { config, theme } from './config';
 import './App.css';
 
+// 이미지 보호 스타일 (config.gallery.protectImages가 true일 때 적용)
+const getImageProtectionStyle = () => config.gallery?.protectImages ? {
+  WebkitUserSelect: 'none',
+  userSelect: 'none',
+  WebkitTouchCallout: 'none',
+  pointerEvents: 'none',
+} : {};
+
+// 이미지 보호 이벤트 핸들러
+const preventImageActions = (e) => {
+  if (config.gallery?.protectImages) {
+    e.preventDefault();
+    return false;
+  }
+};
+
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [copied, setCopied] = useState({ 
@@ -559,6 +575,8 @@ END:VCALENDAR`;
                   alt="확대 이미지"
                   onClick={(e) => e.stopPropagation()}
                   draggable={false}
+                  onContextMenu={preventImageActions}
+                  onDragStart={preventImageActions}
                   style={{
                     maxWidth: '100%',
                     maxHeight: '85vh',
@@ -566,6 +584,8 @@ END:VCALENDAR`;
                     borderRadius: '0.5rem',
                     cursor: zoomScale > 1 ? 'grab' : 'default',
                     userSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    WebkitTouchCallout: 'none',
                     transformOrigin: 'center center',
                     transform: `scale(${zoomScale}) translate(${zoomPosition.x / zoomScale}px, ${zoomPosition.y / zoomScale}px)`,
                     transition: 'transform 0.1s ease-out'
@@ -856,11 +876,15 @@ END:VCALENDAR`;
             <img 
               src={config.hero.backgroundImage}
               alt="Wedding"
+              draggable={false}
+              onContextMenu={preventImageActions}
+              onDragStart={preventImageActions}
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center center'
+                objectPosition: 'center center',
+                ...getImageProtectionStyle()
               }}
             />
             {/* 어두운 오버레이 - 텍스트 가독성 */}
@@ -1077,6 +1101,9 @@ END:VCALENDAR`;
                 <img 
                   src={config.couple.groomImage}
                   alt="신랑"
+                  draggable={false}
+                  onContextMenu={preventImageActions}
+                  onDragStart={preventImageActions}
                   style={{
                     width: '100%',
                     height: '125%',
@@ -1084,7 +1111,8 @@ END:VCALENDAR`;
                     objectPosition: 'center 15%',
                     position: 'absolute',
                     top: '-12.5%',
-                    transform: 'scale(1.1)'
+                    transform: 'scale(1.1)',
+                    ...getImageProtectionStyle()
                   }}
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -1123,6 +1151,9 @@ END:VCALENDAR`;
                 <img 
                   src={config.couple.brideImage}
                   alt="신부"
+                  draggable={false}
+                  onContextMenu={preventImageActions}
+                  onDragStart={preventImageActions}
                   style={{
                     width: '100%',
                     height: '125%',
@@ -1130,7 +1161,8 @@ END:VCALENDAR`;
                     objectPosition: 'center 40%',
                     position: 'absolute',
                     top: '-12.5%',
-                    transform: 'scale(1.1)'
+                    transform: 'scale(1.1)',
+                    ...getImageProtectionStyle()
                   }}
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -1286,6 +1318,8 @@ END:VCALENDAR`;
                         src={image}
                         alt={`갤러리 ${index + 1}`}
                         draggable={false}
+                        onContextMenu={preventImageActions}
+                        onDragStart={preventImageActions}
                         style={{
                           position: 'absolute',
                           top: 0,
@@ -1294,7 +1328,8 @@ END:VCALENDAR`;
                           height: '100%',
                           objectFit: 'cover',
                           objectPosition: 'center',
-                          userSelect: 'none'
+                          userSelect: 'none',
+                          ...getImageProtectionStyle()
                         }}
                         onError={(e) => {
                           e.target.style.display = 'none';
