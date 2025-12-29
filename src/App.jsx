@@ -21,46 +21,54 @@ const preventImageActions = (e) => {
 
 // 벚꽃잎 컴포넌트
 const CherryBlossomPetal = ({ id, config: petalConfig }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const random = (min, max) => Math.random() * (max - min) + min;
   
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-      setScreenHeight(window.innerHeight);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
   // 랜덤 값 생성 (컴포넌트 생성 시 한 번만)
-  const randomValues = useRef({
-    // 우상단 시작 위치 (90-100% x, -50px y)
-    startXPercent: random(90, 100),
-    startY: -50,
+  const randomValues = useRef(() => {
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+    
+    // 우상단 시작 위치 (90-100% x, -100px y)
+    const startXPercent = random(90, 100);
+    const startY = -100;
+    
     // 좌하단 끝 위치 (왼쪽으로 이동하면서 아래로)
-    endXPercent: random(-10, -5), // 화면 왼쪽 밖으로
-    endY: screenHeight + 100,
+    const endXPercent = random(-15, -10); // 화면 왼쪽 밖으로
+    const endY = screenHeight + 200; // 화면 아래로 충분히 떨어짐
+    
     // 곡선 중간점 (대각선 경로를 따라)
-    midXPercent: random(30, 50),
-    midY: random(screenHeight * 0.4, screenHeight * 0.6),
+    const midXPercent = random(30, 50);
+    const midY = random(screenHeight * 0.3, screenHeight * 0.7);
+    
     // 곡선 랜덤성 (은은하게)
-    curveX: random(petalConfig.curveRandomness.min, petalConfig.curveRandomness.max),
-    curveY: random(petalConfig.curveRandomness.min * 0.5, petalConfig.curveRandomness.max * 0.5),
-    duration: random(petalConfig.duration.min, petalConfig.duration.max),
-    rotation: random(petalConfig.rotation.min, petalConfig.rotation.max),
-    size: random(petalConfig.size.min, petalConfig.size.max),
-  }).current;
+    const curveX = random(petalConfig.curveRandomness.min, petalConfig.curveRandomness.max);
+    const curveY = random(petalConfig.curveRandomness.min * 0.5, petalConfig.curveRandomness.max * 0.5);
+    
+    // 픽셀 단위로 변환
+    const startXPx = (startXPercent / 100) * screenWidth;
+    const midXPx = (midXPercent / 100) * screenWidth + curveX;
+    const endXPx = (endXPercent / 100) * screenWidth;
+    
+    return {
+      startXPercent,
+      startY,
+      endXPercent,
+      endY,
+      startXPx,
+      midXPx,
+      endXPx,
+      midY,
+      curveY,
+      duration: random(petalConfig.duration.min, petalConfig.duration.max),
+      rotation: random(petalConfig.rotation.min, petalConfig.rotation.max),
+      size: random(petalConfig.size.min, petalConfig.size.max),
+    };
+  }()).current;
   
   const petalImage = petalConfig.petalImages[id % petalConfig.petalImages.length];
   
   // 대각선 곡선 경로 생성 (우상단 -> 좌하단)
-  const startXPx = (randomValues.startXPercent / 100) * screenWidth;
-  const midXPx = (randomValues.midXPercent / 100) * screenWidth + randomValues.curveX;
-  const endXPx = (randomValues.endXPercent / 100) * screenWidth;
-  
-  const pathX = [startXPx, midXPx, endXPx];
+  const pathX = [randomValues.startXPx, randomValues.midXPx, randomValues.endXPx];
   const pathY = [
     randomValues.startY,
     randomValues.midY + randomValues.curveY,
@@ -82,7 +90,7 @@ const CherryBlossomPetal = ({ id, config: petalConfig }) => {
       }}
       initial={{ 
         y: randomValues.startY,
-        x: startXPx,
+        x: randomValues.startXPx,
         rotate: 0,
       }}
       animate={{
@@ -105,50 +113,11 @@ const CherryBlossomEffect = () => {
   if (!config.cherryBlossom?.enabled) return null;
   
   const petalConfig = config.cherryBlossom;
-  const [activePetals, setActivePetals] = useState([]);
-  const petalIdRef = useRef(0);
   
-  useEffect(() => {
-    const random = (min, max) => Math.random() * (max - min) + min;
-    
-    // 첫 생성 (2~4개)
-    const initialCount = Math.floor(random(2, petalConfig.maxConcurrent + 1));
-    const initialPetals = Array.from({ length: initialCount }, () => ({
-      id: petalIdRef.current++,
-    }));
-    setActivePetals(initialPetals);
-    
-    // 주기적으로 생성 (한 화면에 2~4개 유지)
-    const scheduleNext = () => {
-      const delay = random(petalConfig.spawnInterval.min * 1000, petalConfig.spawnInterval.max * 1000);
-      setTimeout(() => {
-        setActivePetals(prev => {
-          const currentCount = prev.length;
-          const maxCount = petalConfig.maxConcurrent;
-          
-          // 한 화면에 2~4개만 유지
-          if (currentCount >= maxCount) return prev;
-          
-          // 생성할 개수 결정 (1~2개씩, 최대 개수 제한)
-          const spawnCount = Math.min(
-            Math.floor(random(petalConfig.spawnCount.min, petalConfig.spawnCount.max + 1)),
-            maxCount - currentCount
-          );
-          
-          // 새로운 벚꽃잎 생성 (무한 반복되므로 제거하지 않음)
-          const newPetals = Array.from({ length: spawnCount }, () => ({
-            id: petalIdRef.current++,
-          }));
-          
-          return [...prev, ...newPetals];
-        });
-        
-        scheduleNext();
-      }, delay);
-    };
-    
-    scheduleNext();
-  }, [petalConfig]);
+  // 고정된 개수만 생성 (한 번만, 무한 반복되므로 더 이상 생성하지 않음)
+  const petals = useRef(
+    Array.from({ length: petalConfig.count }, (_, i) => i)
+  ).current;
   
   return (
     <div style={{
@@ -161,12 +130,11 @@ const CherryBlossomEffect = () => {
       zIndex: 1,
       overflow: 'hidden',
     }}>
-      {activePetals.map((petal) => (
+      {petals.map((id) => (
         <CherryBlossomPetal 
-          key={petal.id} 
-          id={petal.id}
+          key={id} 
+          id={id}
           config={petalConfig} 
-          onComplete={petal.onComplete}
         />
       ))}
     </div>
