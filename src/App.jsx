@@ -19,6 +19,98 @@ const preventImageActions = (e) => {
   }
 };
 
+// 벚꽃잎 컴포넌트
+const SakuraPetal = ({ index, total }) => {
+  const sakuraConfig = config.sakuraEffect;
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  
+  // 화면 크기 변경 감지
+  useEffect(() => {
+    const handleResize = () => setScreenHeight(window.innerHeight);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  // 랜덤 속성 생성
+  const startX = Math.random() * 100; // 0-100%
+  const duration = sakuraConfig.durationRange[0] + 
+    Math.random() * (sakuraConfig.durationRange[1] - sakuraConfig.durationRange[0]);
+  const size = sakuraConfig.sizeRange[0] + 
+    Math.random() * (sakuraConfig.sizeRange[1] - sakuraConfig.sizeRange[0]);
+  const color = sakuraConfig.colors[Math.floor(Math.random() * sakuraConfig.colors.length)];
+  const delay = Math.random() * 2; // 0-2초 지연
+  
+  // 벚꽃잎 모양 (CSS로 그리기)
+  const petalStyle = {
+    position: 'absolute',
+    width: `${size}px`,
+    height: `${size}px`,
+    left: `${startX}%`,
+    top: '-5%',
+    pointerEvents: 'none',
+    willChange: 'transform',
+    opacity: 0.6 + Math.random() * 0.3, // 0.6-0.9
+  };
+
+  // 좌우 흔들림 애니메이션을 위한 랜덤 값
+  const swayAmount = (Math.random() - 0.5) * 80; // -40 ~ 40px
+  const rotationDirection = Math.random() > 0.5 ? 1 : -1;
+  const totalRotation = 360 * rotationDirection * (0.5 + Math.random() * 0.5); // 180~360도
+
+  return (
+    <motion.div
+      style={petalStyle}
+      initial={{ 
+        y: 0, 
+        rotate: 0,
+        opacity: 0,
+        x: 0
+      }}
+      animate={{ 
+        y: screenHeight + 100,
+        rotate: totalRotation,
+        opacity: [0, 0.7, 0.7, 0],
+        x: [0, swayAmount, -swayAmount * 0.5, swayAmount * 0.3, 0],
+      }}
+      transition={{
+        duration: duration,
+        delay: delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+        opacity: {
+          times: [0, 0.1, 0.85, 1],
+          duration: duration,
+        },
+        x: {
+          times: [0, 0.3, 0.6, 0.8, 1],
+          duration: duration,
+          ease: "easeInOut"
+        }
+      }}
+    >
+      {/* 벚꽃잎 SVG 모양 - 단순한 타원형 */}
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 100 100"
+        style={{ filter: 'blur(0.2px)' }}
+      >
+        <defs>
+          <radialGradient id={`gradient-${index}`} cx="50%" cy="30%">
+            <stop offset="0%" stopColor={color} stopOpacity="0.85" />
+            <stop offset="100%" stopColor={color} stopOpacity="0.4" />
+          </radialGradient>
+        </defs>
+        {/* 벚꽃잎 모양 - 타원형에 약간의 곡선 */}
+        <path
+          d="M50,10 Q60,25 65,40 Q70,55 65,70 Q60,85 50,90 Q40,85 35,70 Q30,55 35,40 Q40,25 50,10 Z"
+          fill={`url(#gradient-${index})`}
+        />
+      </svg>
+    </motion.div>
+  );
+};
+
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [copied, setCopied] = useState({ 
@@ -2218,6 +2310,26 @@ END:VCALENDAR`;
           </AnimatePresence>
         </motion.button>
       </div>
+
+      {/* 벚꽃잎 효과 - 자동 스크롤 완료 후 시작 */}
+      {introComplete && config.sakuraEffect?.enabled && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            overflow: 'hidden',
+          }}
+        >
+          {Array.from({ length: config.sakuraEffect.petalCount }).map((_, index) => (
+            <SakuraPetal key={index} index={index} total={config.sakuraEffect.petalCount} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

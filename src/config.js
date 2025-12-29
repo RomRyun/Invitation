@@ -269,4 +269,33 @@ export const config = {
     repository: 'https://github.com/RomRyun/Invitation',
     showRepository: true,
   },
+
+  // ============================================================
+  // 10. 벚꽃잎 효과 (Sakura Petal Effect)
+  // ============================================================
+  sakuraEffect: {
+    // 벚꽃잎 효과 활성화 여부
+    enabled: true,
+    
+    // 벚꽃잎 개수 (성능 고려: 20-30개 권장)
+    petalCount: 25,
+    
+    // 벚꽃잎 색상 (은은한 분홍/흰색 계열)
+    colors: [
+      '#FFE5E5', // 연한 분홍
+      '#FFD6E8', // 분홍
+      '#FFE8F0', // 밝은 분홍
+      '#FFF0F5', // 매우 연한 분홍
+      '#FFFFFF', // 흰색
+    ],
+    
+    // 애니메이션 속도 범위 (초 단위, 낮을수록 빠름)
+    durationRange: [8, 15],
+    
+    // 벚꽃잎 크기 범위 (px)
+    sizeRange: [20, 35],
+    
+    // 회전 속도 범위 (도/초)
+    rotationRange: [30, 90],
+  },
 };
