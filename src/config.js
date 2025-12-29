@@ -280,7 +280,7 @@ export const config = {
       '/SakuraPetals02.png',
       '/SakuraPetals03.png',
     ],
-    count: 2,                         // 고정된 벚꽃잎 개수 (1~2개)
+    count: 3,                         // 고정된 벚꽃잎 개수 (2~4개)
     size: {                           // 벚꽃잎 크기 (px)
       min: 20,
       max: 40,
