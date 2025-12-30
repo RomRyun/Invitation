@@ -107,6 +107,17 @@ const SakuraPetal = ({ id, config: petalConfig }) => {
       ref={petalRef}
       src={petalImage}
       alt=""
+      onError={(e) => {
+        console.error('벚꽃잎 이미지 로드 실패:', petalImage);
+        // 이미지 로드 실패 시 빨간색 박스로 표시 (디버깅용)
+        e.target.style.display = 'block';
+        e.target.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+        e.target.style.width = `${randomValues.size}px`;
+        e.target.style.height = `${randomValues.size}px`;
+      }}
+      onLoad={() => {
+        console.log('벚꽃잎 이미지 로드 성공:', petalImage, '크기:', randomValues.size);
+      }}
       style={{
         position: 'fixed',
         top: 0,
@@ -114,7 +125,7 @@ const SakuraPetal = ({ id, config: petalConfig }) => {
         width: `${randomValues.size}px`,
         height: 'auto',
         pointerEvents: 'none',
-        zIndex: 1,
+        zIndex: 9999,
         willChange: 'transform',
       }}
     />
@@ -123,7 +134,18 @@ const SakuraPetal = ({ id, config: petalConfig }) => {
 
 // 벚꽃잎 효과 컴포넌트
 const SakuraPetalEffect = () => {
-  if (!config.sakuraPetal?.enabled) return null;
+  useEffect(() => {
+    console.log('SakuraPetalEffect 렌더링:', {
+      enabled: config.sakuraPetal?.enabled,
+      count: config.sakuraPetal?.count,
+      images: config.sakuraPetal?.petalImages
+    });
+  }, []);
+  
+  if (!config.sakuraPetal?.enabled) {
+    console.log('벚꽃잎 효과 비활성화됨');
+    return null;
+  }
   
   const petalConfig = config.sakuraPetal;
   
@@ -140,7 +162,7 @@ const SakuraPetalEffect = () => {
       width: '100%',
       height: '100%',
       pointerEvents: 'none',
-      zIndex: 1,
+      zIndex: 9999,
       overflow: 'visible',
     }}>
       {petals.map((id) => (
@@ -657,7 +679,10 @@ END:VCALENDAR`;
       boxShadow: '0 0 30px rgba(0,0,0,0.1)'
     }}>
       {/* 벚꽃잎 효과 - 자동 스크롤 완료 후 시작 */}
-      {introComplete && <SakuraPetalEffect />}
+      {(() => {
+        console.log('introComplete 상태:', introComplete);
+        return introComplete && <SakuraPetalEffect />;
+      })()}
       
       {/* 이미지 확대 모달 */}
       <AnimatePresence>
