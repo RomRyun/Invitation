@@ -25,7 +25,7 @@ export const config = {
     nameEn1Size: '26px',
     
     // B. & 기호
-    ampersand: '&',
+    ampersand: '&&',
     ampersandFont: "'La Paloma', 'Great Vibes', cursive",
     ampersandSize: '18px',
     
@@ -270,4 +270,40 @@ export const config = {
     showRepository: true,
   },
 
+  // ============================================================
+  // 10. 벚꽃잎 효과 (Cherry Blossom Petal Effect)
+  // ============================================================
+  sakuraPetal: {
+    enabled: true,                    // 효과 활성화 여부
+    petalImages: [                     // 벚꽃잎 이미지 파일들
+      '/SakuraPetals01.png',
+      '/SakuraPetals02.png',
+      '/SakuraPetals03.png',
+    ],
+    count: 5,                          // 동시에 떨어지는 벚꽃잎 개수 (1.5배 증가: 3 → 5)
+    size: {                            // 벚꽃잎 크기 (px)
+      min: 25,
+      max: 40,
+    },
+    duration: {                       // 떨어지는 시간 (초) - 더 빠르게
+      min: 10,
+      max: 18,
+    },
+    delay: {                           // 시작 지연 시간 (초) - 더 자주 나오도록
+      min: 0,
+      max: 5,
+    },
+    sway: {                            // 좌우 흔들림 범위 (px) - 나풀대는 효과
+      min: 40,
+      max: 100,
+    },
+    rotation: {                        // 회전 범위 (도) - 더 자연스럽게
+      min: -180,
+      max: 180,
+    },
+    opacity: {                         // 투명도 (알파)
+      min: 0.6,
+      max: 0.9,
+    },
+  },
 };

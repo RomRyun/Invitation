@@ -25,26 +25,30 @@ const SakuraPetal = ({ id, config: petalConfig }) => {
   const random = (min, max) => Math.random() * (max - min) + min;
   
   // 랜덤 값 생성 (컴포넌트 생성 시 한 번만)
-  const randomValues = useRef(() => {
+  const randomValues = useRef((() => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
     const documentHeight = Math.max(document.documentElement.scrollHeight, screenHeight * 2);
     
-    // 우상단 시작 위치 (90-100% x)
-    const startX = random(screenWidth * 0.9, screenWidth * 1.0);
-    const startY = -100;
+    // 우상단 시작 위치를 더 다양하게 (70-110% x) - 화면 밖까지 포함
+    const startX = random(screenWidth * 0.7, screenWidth * 1.1);
+    const startY = random(-150, -50); // 시작 높이도 다양하게
     
     // 좌하단 끝 위치 (왼쪽으로 이동) - 명확한 대각선
-    const endX = random(-screenWidth * 0.2, -screenWidth * 0.1);
+    const endX = random(-screenWidth * 0.3, screenWidth * 0.1);
     const endY = documentHeight + 200; // 문서 전체 높이 고려
     
     // 중간 곡선점 (대각선 경로)
-    const midX = random(screenWidth * 0.2, screenWidth * 0.5);
+    const midX = random(screenWidth * 0.1, screenWidth * 0.6);
     const midY = random(screenHeight * 0.3, screenHeight * 0.7);
     
     // 나풀대는 효과 (좌우 흔들림)
     const swayX = random(petalConfig.sway.min, petalConfig.sway.max);
     const swayY = random(petalConfig.sway.min * 0.3, petalConfig.sway.max * 0.5);
+    
+    // 회전을 더 자연스럽게 (작은 각도로 여러 번 회전)
+    const baseRotation = random(petalConfig.rotation.min, petalConfig.rotation.max);
+    const rotationVariation = random(-90, 90); // 추가 변동
     
     return {
       startX,
@@ -54,11 +58,12 @@ const SakuraPetal = ({ id, config: petalConfig }) => {
       endX,
       endY,
       duration: random(petalConfig.duration.min, petalConfig.duration.max),
-      delay: id * (petalConfig.delay.max / petalConfig.count) + random(0, 2),
-      rotation: random(petalConfig.rotation.min, petalConfig.rotation.max),
+      delay: id * (petalConfig.delay.max / petalConfig.count) + random(0, 1.5), // 더 자주 나오도록
+      rotation: baseRotation + rotationVariation,
       size: random(petalConfig.size.min, petalConfig.size.max),
+      opacity: random(petalConfig.opacity?.min || 0.6, petalConfig.opacity?.max || 0.9),
     };
-  }()).current;
+  })()).current;
   
   const petalImage = petalConfig.petalImages[Math.floor(Math.random() * petalConfig.petalImages.length)];
   
@@ -70,17 +75,25 @@ const SakuraPetal = ({ id, config: petalConfig }) => {
     
     // 이미지가 로드된 후 애니메이션 시작
     const setupAnimation = () => {
-      // CSS keyframes 생성
+      // CSS keyframes 생성 (opacity 변화 포함)
       const keyframes = `
         @keyframes ${uniqueId} {
           0% {
             transform: translate3d(${randomValues.startX}px, ${randomValues.startY}px, 0) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: ${randomValues.opacity};
+          }
+          90% {
+            opacity: ${randomValues.opacity};
           }
           50% {
             transform: translate3d(${randomValues.midX}px, ${randomValues.midY}px, 0) rotate(${randomValues.rotation * 0.5}deg);
           }
           100% {
             transform: translate3d(${randomValues.endX}px, ${randomValues.endY}px, 0) rotate(${randomValues.rotation}deg);
+            opacity: 0;
           }
         }
       `;
@@ -118,44 +131,32 @@ const SakuraPetal = ({ id, config: petalConfig }) => {
   }, [id]);
   
   return (
-    <div
+    <img
       ref={petalRef}
+      src={petalImage}
+      alt=""
+      onError={(e) => {
+        console.error('❌ 벚꽃잎 이미지 로드 실패:', petalImage);
+        // 이미지 로드 실패 시 빨간색 박스로 표시 (디버깅용)
+        e.target.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+        e.target.style.border = '2px solid red';
+      }}
+      onLoad={() => {
+        console.log('✅ 벚꽃잎 이미지 로드 성공:', petalImage, '크기:', randomValues.size);
+      }}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         width: `${randomValues.size}px`,
-        height: `${randomValues.size}px`,
+        height: 'auto',
         pointerEvents: 'none',
         zIndex: 9999,
-        willChange: 'transform',
+        willChange: 'transform, opacity',
         visibility: 'visible',
-        backgroundImage: `url(${petalImage})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
+        opacity: randomValues.opacity,
       }}
-      onError={() => {
-        console.error('❌ 벚꽃잎 이미지 로드 실패:', petalImage);
-      }}
-    >
-      <img
-        src={petalImage}
-        alt=""
-        style={{ display: 'none' }}
-        onError={(e) => {
-          console.error('❌ 벚꽃잎 이미지 로드 실패:', petalImage);
-          // 이미지 로드 실패 시 빨간색 박스로 표시 (디버깅용)
-          if (petalRef.current) {
-            petalRef.current.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
-            petalRef.current.style.border = '2px solid red';
-          }
-        }}
-        onLoad={() => {
-          console.log('✅ 벚꽃잎 이미지 로드 성공:', petalImage, '크기:', randomValues.size);
-        }}
-      />
-    </div>
+    />
   );
 };
 
